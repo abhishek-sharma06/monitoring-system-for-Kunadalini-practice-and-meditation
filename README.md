@@ -233,7 +233,7 @@ The dashboard uses a **5-pillar KPI framework** to assess spiritual progress:
 
 ## 📄 License
 
-**© 2025 A Vinay Kumar. All Rights Reserved.**
+**© 2025 Abhishek Sharma M. All Rights Reserved.**
 
 This project is **proprietary** and protected under a custom All Rights Reserved license. You may **NOT** copy, modify, distribute, or use this project (in whole or in part) without **prior written permission** from the author. If permission is granted, proper **credit and attribution** must be given.
 
@@ -241,7 +241,7 @@ See the [LICENSE](./LICENSE) file for full terms.
 
 > ⚠️ **This repository is public for portfolio/reference purposes only. Public visibility does NOT grant any usage rights.**
 
-To request permission, contact: [GitHub – Avinaykumar26](https://github.com/Avinaykumar26)
+To request permission, contact: [GitHub – abhishek-sharma06][(https://github.com/abhishek-sharma06)
 
 ---
 
