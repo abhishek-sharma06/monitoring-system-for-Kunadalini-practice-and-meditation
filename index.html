@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kundalini Tantra - Awaken Your Inner Energy</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#40E0D0",
+                        "accent-violet": "#6A0DAD",
+                        "accent-gold": "#FF9933",
+                        "background-light": "#F9F9F9",
+                        "background-dark": "#101a18",
+                        "text-light": "#111814",
+                        "text-dark": "#e0e0e0",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1a2c26",
+                        "border-light": "#e0e0e0",
+                        "border-dark": "#33413c"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+    <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="w-full">
+                <header
+                    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark px-6 md:px-10 lg:px-20 py-4 fixed top-0 left-0 right-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+                    <div class="flex items-center gap-4 text-text-light dark:text-text-dark">
+                        <div class="text-accent-violet">
+                            <span class="material-symbols-outlined text-3xl">self_improvement</span>
+                        </div>
+                        <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Kundalini Tantra</h2>
+                    </div>
+                    <nav class="hidden md:flex flex-1 justify-center gap-8">
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors"
+                            href="components/kundalini-analuysis.html">Tantra Analysis</a>
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors"
+                            href="components/kundalini-tantra-tracker.html">Chakra Monitoring</a>
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors"
+                            href="components/guidance.html">Guidance</a>
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors"
+                            href="components/meditation.html">Resources</a>
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors"
+                            href="components/posedetection.html">Yoga capture</a>
+                    </nav>
+                    <div class="flex gap-2">
+                        <a href="../welcome_&_authentication/code.html"
+                            class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-accent-violet text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-opacity">
+                            🧘
+                        </a>
+                    </div>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn"
+                        class="md:hidden flex items-center justify-center p-2 text-text-light dark:text-text-dark">
+                        <span class="material-symbols-outlined text-2xl">menu</span>
+                    </button>
+                </header>
+
+                <!-- Mobile Navigation Menu -->
+                <div id="mobile-menu"
+                    class="hidden fixed top-[65px] left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b border-border-light dark:border-border-dark shadow-lg md:hidden">
+                    <nav class="flex flex-col p-4 gap-4">
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors py-2"
+                            href="components/kundalini-analuysis.html">Tantra Analysis</a>
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors py-2"
+                            href="components/kundalini-tantra-tracker.html">Chakra Monitoring</a>
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors py-2"
+                            href="components/guidance.html">Guidance</a>
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors py-2"
+                            href="components/meditation.html">Resources</a>
+                        <a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors py-2"
+                            href="components/.html">Yoga capture</a>
+                    </nav>
+                </div>
+            </div>
+
+            <main class="flex-1 pt-20">
+                <section class="w-full py-20 lg:py-32">
+                    <div class="container mx-auto px-6 lg:px-8">
+                        <div class="max-w-4xl mx-auto text-center">
+                            <h1
+                                class="text-4xl font-black leading-tight tracking-tighter md:text-5xl lg:text-6xl text-text-light dark:text-text-dark">
+                                Your Hub for Spiritual Awakening
+                            </h1>
+                            <p class="mt-4 max-w-2xl mx-auto text-base md:text-lg text-gray-600 dark:text-gray-400">
+                                Navigate your journey of inner harmony. Explore our tools for Tantra analysis, Chakra
+                                monitoring, AI-powered guidance, and a wealth of spiritual resources.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="pb-16 lg:pb-24">
+                    <div class="container mx-auto px-6 lg:px-8">
+                        <div class="max-w-5xl mx-auto">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <!-- Tantra Analysis Card -->
+                                <a class="group flex flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark p-6 text-center items-center border border-border-light dark:border-border-dark hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                    href="components/kundalini-analuysis.html">
+                                    <div class="text-accent-violet">
+                                        <span class="material-symbols-outlined text-4xl">analytics</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold leading-tight">Tantra Analysis</h3>
+                                        <p
+                                            class="text-sm font-normal leading-normal text-gray-500 dark:text-gray-400 mt-2">
+                                            Personalized insights and practice recommendations.
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <!-- Chakra Monitoring Card -->
+                                <a class="group flex flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark p-6 text-center items-center border border-border-light dark:border-border-dark hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                    href="components/kundalini-tantra-tracker.html">
+                                    <div class="text-accent-violet">
+                                        <span class="material-symbols-outlined text-4xl">track_changes</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold leading-tight">Chakra Monitoring</h3>
+                                        <p
+                                            class="text-sm font-normal leading-normal text-gray-500 dark:text-gray-400 mt-2">
+                                            Track and balance your energy centers with our tools.
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <!-- AI Guidance Card -->
+                                <a class="group flex flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark p-6 text-center items-center border border-border-light dark:border-border-dark hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                    href="components/guidance.html">
+                                    <div class="text-accent-violet">
+                                        <span class="material-symbols-outlined text-4xl">psychology</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold leading-tight">Guidance</h3>
+                                        <p
+                                            class="text-sm font-normal leading-normal text-gray-500 dark:text-gray-400 mt-2">
+                                            Meditation and practice support.
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <!-- Resources Page Card -->
+                                <a class="group flex flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark p-6 text-center items-center border border-border-light dark:border-border-dark hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                    href="components/meditation.html">
+                                    <div class="text-accent-violet">
+                                        <span class="material-symbols-outlined text-4xl">auto_stories</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold leading-tight">Resources Page</h3>
+                                        <p
+                                            class="text-sm font-normal leading-normal text-gray-500 dark:text-gray-400 mt-2">
+                                            Access articles, videos, and guided sessions.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 lg:py-24 bg-card-light dark:bg-card-dark">
+                    <div class="container mx-auto px-6 lg:px-8">
+                        <div class="max-w-4xl mx-auto text-center">
+                            <span class="material-symbols-outlined text-4xl text-accent-gold">format_quote</span>
+                            <blockquote class="mt-4">
+                                <p class="text-xl md:text-2xl italic text-gray-800 dark:text-gray-200">
+                                    "This platform has been a transformative tool in my spiritual practice. The blend of
+                                    ancient wisdom with modern technology is seamless and incredibly effective. I've
+                                    never felt more connected to my inner self."
+                                </p>
+                            </blockquote>
+                            <footer class="mt-6">
+                                <div class="font-bold">Aria Montgomery</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">Yoga Practitioner, Austin, TX
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 lg:py-24">
+                    <div class="container mx-auto px-6 lg:px-8">
+                        <div class="bg-accent-violet rounded-lg p-10 md:p-16 text-center text-white">
+                            <h2 class="text-3xl font-bold">Begin Your Journey Today</h2>
+                            <p class="mt-4 max-w-2xl mx-auto">
+                                Access your personalized dashboard or to start your path of
+                                self-discovery, spiritual growth, and profound inner peace.
+                            </p>
+                            <div class="mt-8">
+                                <a href="https://dashboard-for-kundalini-analytics-and.onrender.com/"
+                                    class="inline-flex mx-auto min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-primary text-background-dark text-base font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+                                    Enter the App
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="bg-card-light dark:bg-card-dark border-t border-border-light dark:border-border-dark">
+                <div class="container mx-auto px-6 lg:px-8 py-12">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <div class="text-accent-violet">
+                                    <span class="material-symbols-outlined text-2xl">self_improvement</span>
+                                </div>
+                                <h3 class="text-base font-bold">Kundalini Tantra</h3>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Awakening your inner energy.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold tracking-wide">Company</h4>
+                            <ul class="mt-4 space-y-2 text-sm">
+                                <li><a class="text-gray-600 dark:text-gray-400 hover:text-primary" href="#">About Us</a>
+                                </li>
+                                <li><a class="text-gray-600 dark:text-gray-400 hover:text-primary" href="#">FAQ</a></li>
+                                <li><a class="text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold tracking-wide">Legal</h4>
+                            <ul class="mt-4 space-y-2 text-sm">
+                                <li><a class="text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Privacy
+                                        Policy</a></li>
+                                <li><a class="text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Terms of
+                                        Service</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold tracking-wide">Follow Us</h4>
+                            <div class="flex mt-4 space-x-4 text-gray-600 dark:text-gray-400">
+                                <a class="hover:text-primary" href="#">
+                                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a class="hover:text-primary" href="#">
+                                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a class="hover:text-primary" href="#">
+                                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="mt-12 border-t border-border-light dark:border-border-dark pt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                        <p>© 2024 Kundalini Tantra. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('.material-symbols-outlined');
+            icon.textContent = mobileMenu.classList.contains('hidden') ? 'menu' : 'close';
+        });
+
+        // Close mobile menu when clicking on a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.querySelector('.material-symbols-outlined').textContent = 'menu';
+            });
+        });
+    </script>
+</body>
+
+</html>

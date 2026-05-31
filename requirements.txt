@@ -1,0 +1,16 @@
+# ============================================
+# Analysis and Monitoring System for
+# Kundalini Tantra Practices and Meditation
+# ============================================
+# Python dependencies for the Streamlit
+# analytics dashboard (components/dashboard.py)
+# ============================================
+
+# Web framework for interactive dashboards
+streamlit>=1.30.0
+
+# Data manipulation and analysis
+pandas>=2.0.0
+
+# Interactive data visualization
+plotly>=5.18.0

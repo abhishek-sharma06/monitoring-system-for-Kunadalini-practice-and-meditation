@@ -1,0 +1,192 @@
+{
+  "sampleData": {
+    "chakras": [
+      {
+        "name": "Root",
+        "sanskrit": "Muladhara",
+        "color": "#e74c3c",
+        "mantra": "LAM",
+        "exercises": ["Mula Bandha", "Mountain Pose", "Squats", "Walking barefoot"]
+      },
+      {
+        "name": "Sacral",
+        "sanskrit": "Swadhisthana",
+        "color": "#e67e22",
+        "mantra": "VAM",
+        "exercises": ["Butterfly Pose", "Pigeon Pose", "Pelvic Tilts", "Creative Expression"]
+      },
+      {
+        "name": "Solar Plexus",
+        "sanskrit": "Manipura",
+        "color": "#f1c40f",
+        "mantra": "RAM",
+        "exercises": ["Plank", "Boat Pose", "Kapalabhati", "Sun Salutations"]
+      },
+      {
+        "name": "Heart",
+        "sanskrit": "Anahata",
+        "color": "#2ecc71",
+        "mantra": "YAM",
+        "exercises": ["Camel Pose", "Cobra Pose", "Heart Meditation", "Loving-kindness Meditation"]
+      },
+      {
+        "name": "Throat",
+        "sanskrit": "Vishuddha",
+        "color": "#3498db",
+        "mantra": "HAM",
+        "exercises": ["Neck Stretches", "Singing", "Ujjayi Pranayama", "Journaling"]
+      },
+      {
+        "name": "Third Eye",
+        "sanskrit": "Ajna",
+        "color": "#8e44ad",
+        "mantra": "OM",
+        "exercises": ["Third Eye Meditation", "Trataka", "Visualization", "Mindfulness"]
+      },
+      {
+        "name": "Crown",
+        "sanskrit": "Sahasrara",
+        "color": "#9b59b6",
+        "mantra": "Silence/OM",
+        "exercises": ["Silent Meditation", "Yoga Nidra", "Headstand", "Selfless Service"]
+      }
+    ],
+    "bodyParts": [
+      {
+        "part": "Legs & Feet",
+        "chakra": "Root",
+        "focus": "PS",
+        "exercises": ["Tadasana", "Mountain Pose", "Squats", "Walking barefoot"]
+      },
+      {
+        "part": "Pelvis & Reproductive Organs",
+        "chakra": "Sacral",
+        "focus": "PR",
+        "exercises": ["Butterfly Pose", "Pigeon Pose", "Pelvic Tilts", "Dance/Art"]
+      },
+      {
+        "part": "Core & Abdomen",
+        "chakra": "Solar Plexus",
+        "focus": "PS/MS",
+        "exercises": ["Plank", "Boat Pose", "Breath of Fire", "Sun Salutations"]
+      },
+      {
+        "part": "Heart & Chest",
+        "chakra": "Heart",
+        "focus": "ES",
+        "exercises": ["Camel Pose", "Cobra Pose", "Heart Meditation", "Loving-kindness Meditation"]
+      },
+      {
+        "part": "Throat & Neck",
+        "chakra": "Throat",
+        "focus": "ES/MS",
+        "exercises": ["Neck Stretches", "Singing", "Ujjayi Pranayama", "Journaling"]
+      },
+      {
+        "part": "Eyes & Mind",
+        "chakra": "Third Eye",
+        "focus": "MS",
+        "exercises": ["Third Eye Meditation", "Trataka", "Visualization", "Mindfulness"]
+      },
+      {
+        "part": "Brain / Consciousness",
+        "chakra": "Crown",
+        "focus": "SS",
+        "exercises": ["Silent Meditation", "Yoga Nidra", "Selfless Service", "Spiritual Study"]
+      }
+    ],
+    "meditationTechniques": [
+      {
+        "id": "nadi",
+        "title": "Nadi Shodhana (Alternate Nostril)",
+        "level": "Beginner",
+        "chakra": "Ida & Pingala",
+        "duration": 8,
+        "posture": "Comfortable cross-legged",
+        "purpose": "Balance left & right energies, purify nadis",
+        "benefits": "Calmness, clarity, balanced energy",
+        "video": "https://www.youtube.com/watch?v=Y1s5d3AvXLI",
+        "caution": "Avoid when congested or dizzy",
+        "guidance": "Sit with spine straight. Use right thumb and ring finger to alternate nostrils. Gentle, even breath."
+      },
+      {
+        "id": "kapal",
+        "title": "Kapalabhati (Skull Shining Breath)",
+        "level": "Beginner",
+        "chakra": "Muladhara & Manipura",
+        "duration": 4,
+        "posture": "Seated upright",
+        "purpose": "Energize body, cleanse",
+        "benefits": "Alertness, detox, vitality",
+        "video": "https://www.youtube.com/watch?v=G6rDkN5w9tQ",
+        "caution": "Avoid with high blood pressure or pregnancy",
+        "guidance": "Short active exhalations and passive inhalations. Start slowly."
+      },
+      {
+        "id": "bhastrika",
+        "title": "Bhastrika (Bellows Breath)",
+        "level": "Intermediate",
+        "chakra": "Entire spine & chakras",
+        "duration": 5,
+        "posture": "Vajrasana / Padmasana",
+        "purpose": "Rapid prana activation",
+        "benefits": "Energy surge, alert mind",
+        "video": "https://www.youtube.com/watch?v=K6vV1sHq4D8",
+        "caution": "Avoid if anxious or hypertensive",
+        "guidance": "Powerful inhalation & exhalation cycles. Keep focus on belly."
+      },
+      {
+        "id": "bija",
+        "title": "Bija Mantras (Chakra Seed Sounds)",
+        "level": "Beginner",
+        "chakra": "Individual chakras",
+        "duration": 15,
+        "posture": "Any meditative posture",
+        "purpose": "Activate chakras",
+        "benefits": "Vibrational alignment, awareness",
+        "video": "https://www.youtube.com/watch?v=U5L2p3jZ0m0",
+        "caution": "Maintain steady breathing",
+        "guidance": "Chant each bija (Lam, Vam, Ram...) with focused attention on corresponding chakra."
+      },
+      {
+        "id": "visual",
+        "title": "Chakra Visualization (Lotus / Light)",
+        "level": "Intermediate",
+        "chakra": "Root → Crown",
+        "duration": 20,
+        "posture": "Seated spine straight",
+        "purpose": "Guide Kundalini through chakras",
+        "benefits": "Enhanced focus, inner vision",
+        "video": "https://www.youtube.com/watch?v=2MZ8sA7h8G4",
+        "caution": "Avoid over-focus; stay grounded",
+        "guidance": "Visualize each chakra as a spinning lotus of light rising through the spine."
+      },
+      {
+        "id": "mudra",
+        "title": "Mudra & Bandha Practice",
+        "level": "Intermediate",
+        "chakra": "Root / Solar Plexus / Throat",
+        "duration": 10,
+        "posture": "Seated",
+        "purpose": "Contain & direct prana",
+        "benefits": "Stability, safe awakening",
+        "video": "https://www.youtube.com/watch?v=4Z3xQh1zR8k",
+        "caution": "Learn from a teacher for complex bandhas",
+        "guidance": "Practice mula bandha gently. Use hand mudras to direct attention."
+      },
+      {
+        "id": "shakti",
+        "title": "Shakti Visualization (Divine Feminine)",
+        "level": "Advanced",
+        "chakra": "Root → Crown",
+        "duration": 25,
+        "posture": "Meditative posture",
+        "purpose": "Awaken Shakti",
+        "benefits": "Empowerment, healing",
+        "video": "https://www.youtube.com/watch?v=7x2s1P9h1Kk",
+        "caution": "May bring emotional release; have support",
+        "guidance": "Invoke warm, nurturing energy and guide it up the spine."
+      }
+    ]
+  }
+}

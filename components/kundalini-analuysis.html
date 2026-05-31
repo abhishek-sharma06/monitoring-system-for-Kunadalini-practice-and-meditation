@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kundalini Tantra Progress Tracker</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary-purple: #7145c5;
+      --accent-purple: #a78bfa;
+      --lighter-purple: #ede9fe;
+      --night-bg: #181825;
+      --night-card: #26223c;
+      --night-text: #eee;
+      --night-table: #282040;
+      --night-muted: #889;
+    }
+
+    * {
+      transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--lighter-purple);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #333;
+    }
+
+    html.night-mode body {
+      background: var(--night-bg);
+      color: var(--night-text);
+    }
+
+    /* Header */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(111, 66, 193, 0.1);
+      z-index: 1000;
+      position: sticky;
+      top: 0;
+    }
+
+    html.night-mode header {
+      background: var(--night-card);
+      color: var(--night-text);
+      box-shadow: 0 2px 12px rgba(111, 66, 193, 0.15);
+    }
+
+    header h2 {
+      font-weight: 700;
+      color: var(--primary-purple);
+      letter-spacing: -0.5px;
+      margin: 0;
+    }
+
+    html.night-mode header h2 {
+      color: var(--accent-purple);
+    }
+
+    header small {
+      color: #999;
+    }
+
+    html.night-mode header small {
+      color: var(--night-muted);
+    }
+
+    header nav button {
+      font-weight: 600;
+      border-radius: 8px;
+      color: var(--primary-purple);
+      border: 2px solid var(--accent-purple);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 0.5rem 1rem;
+    }
+
+    header nav button:hover {
+      background: var(--primary-purple);
+      color: #fff;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(111, 66, 193, 0.25);
+    }
+
+    html.night-mode header nav button {
+      background: var(--night-table);
+      color: var(--accent-purple);
+      border-color: var(--primary-purple);
+    }
+
+    html.night-mode header nav button:hover {
+      background: var(--primary-purple);
+      color: var(--accent-purple);
+      border-color: var(--accent-purple);
+    }
+
+    /* Sections/Cards */
+    section.card {
+      box-shadow: 0 4px 16px rgba(111, 66, 193, 0.12);
+      border-radius: 14px;
+      border: 2px solid var(--accent-purple);
+      background: #fff;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    section.card:hover {
+      background: linear-gradient(135deg, #fff, var(--lighter-purple));
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(111, 66, 193, 0.2);
+      border-color: var(--primary-purple);
+    }
+
+    html.night-mode section.card {
+      background: var(--night-card);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    html.night-mode section.card:hover {
+      background: linear-gradient(135deg, var(--night-card), #3a3150);
+      box-shadow: 0 16px 48px rgba(111, 66, 193, 0.2);
+    }
+
+    /* Headers */
+    h4 {
+      font-weight: 700;
+      color: var(--primary-purple);
+      margin-bottom: 1.25rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+      border-radius: 2px;
+    }
+
+    html.night-mode h4 {
+      color: var(--accent-purple);
+    }
+
+    /* Labels */
+    label.form-label {
+      font-weight: 600;
+      color: var(--primary-purple);
+      margin-bottom: 0.6rem;
+    }
+
+    html.night-mode label.form-label {
+      color: var(--accent-purple);
+    }
+
+    /* Form Controls */
+    .form-select,
+    .form-control {
+      border-radius: 8px;
+      border: 2px solid var(--accent-purple);
+      font-weight: 500;
+      transition: all 0.25s;
+      background: #fff;
+      color: #333;
+    }
+
+    .form-select:focus,
+    .form-control:focus {
+      border-color: var(--primary-purple);
+      box-shadow: 0 0 0 0.2rem rgba(113, 69, 197, 0.15);
+      background: #fff;
+      color: #333;
+    }
+
+    html.night-mode .form-select,
+    html.night-mode .form-control {
+      background: var(--night-table);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    html.night-mode .form-select:focus,
+    html.night-mode .form-control:focus {
+      background: var(--night-table);
+      color: var(--night-text);
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 0 0.2rem rgba(167, 139, 250, 0.2);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-purple), #5a35a0);
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 0.75rem 2rem;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #5a35a0, var(--primary-purple));
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(111, 66, 193, 0.3);
+      color: #fff;
+    }
+
+    .btn-primary:active {
+      transform: translateY(-2px);
+    }
+
+    /* Progress Bar */
+    .progress {
+      height: 24px;
+      background: #e9e5f5;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(111, 66, 193, 0.08);
+    }
+
+    html.night-mode .progress {
+      background: var(--night-table);
+    }
+
+    .progress-bar {
+      transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.4s;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      font-size: 0.9rem;
+      background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+      box-shadow: 0 2px 8px rgba(111, 66, 193, 0.2);
+    }
+
+    html.night-mode .progress-bar {
+      background: linear-gradient(90deg, var(--accent-purple), var(--primary-purple));
+    }
+
+    /* Footer */
+    footer {
+      background: #fff;
+      box-shadow: 0 -2px 8px rgba(111, 66, 193, 0.1);
+      margin-top: auto;
+    }
+
+    html.night-mode footer {
+      background: var(--night-card);
+      color: var(--night-muted);
+      box-shadow: 0 -2px 12px rgba(111, 66, 193, 0.15);
+    }
+
+    /* Table */
+    .table {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 0;
+      transition: all 0.3s;
+      border: 1px solid var(--accent-purple);
+    }
+
+    .table thead {
+      background: linear-gradient(90deg, var(--primary-purple), #5a35a0);
+      color: #fff;
+    }
+
+    .table thead th {
+      font-weight: 700;
+      border: none;
+      padding: 1rem;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    .table tbody tr {
+      transition: all 0.25s;
+      border-bottom: 1px solid var(--accent-purple);
+    }
+
+    .table tbody tr:hover {
+      background: var(--lighter-purple);
+      transform: scale(1.01);
+      box-shadow: inset 0 0 12px rgba(111, 66, 193, 0.1);
+    }
+
+    .table td {
+      padding: 1rem;
+      color: #555;
+      vertical-align: middle;
+      font-weight: 500;
+    }
+
+    html.night-mode .table {
+      background: var(--night-table);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    html.night-mode .table thead {
+      background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+    }
+
+    html.night-mode .table tbody tr:hover {
+      background: rgba(111, 66, 193, 0.2);
+    }
+
+    html.night-mode .table td {
+      color: var(--night-text);
+    }
+
+    /* Results Section */
+    #resultsSection {
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      border-radius: 14px;
+      border: 2px solid var(--accent-purple);
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(111, 66, 193, 0.12);
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 32px rgba(111, 66, 193, 0.18);
+      transform: translateY(-4px);
+    }
+
+    html.night-mode .card {
+      background: var(--night-card);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.7;
+    }
+
+    html.night-mode .card p {
+      color: var(--night-text);
+    }
+
+    .card b {
+      color: var(--primary-purple);
+      font-weight: 700;
+    }
+
+    html.night-mode .card b {
+      color: var(--accent-purple);
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card ul li {
+      padding: 0.6rem 0 0.6rem 1.8rem;
+      position: relative;
+      color: #666;
+    }
+
+    .card ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary-purple);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    html.night-mode .card ul li {
+      color: var(--night-text);
+    }
+
+    html.night-mode .card ul li::before {
+      color: var(--accent-purple);
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2000;
+      background: linear-gradient(135deg, var(--primary-purple), #5a35a0);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      box-shadow: 0 6px 24px rgba(111, 66, 193, 0.3);
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .toggle-btn:hover {
+      background: linear-gradient(135deg, #5a35a0, var(--accent-purple));
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 10px 32px rgba(111, 66, 193, 0.4);
+    }
+
+    .toggle-btn:active {
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header nav button {
+        margin-bottom: 0.5rem;
+      }
+
+      section.card {
+        margin-bottom: 1.5rem;
+      }
+
+      .toggle-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="py-3 mb-4">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap gap-3">
+      <h2>🕉️ Kundalini <small>Tantra Tracker</small></h2>
+      <nav class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-outline-primary" onclick="scrollToSection('physical')">Physical</button>
+        <button type="button" class="btn btn-outline-primary" onclick="scrollToSection('breath')">Breath</button>
+        <button type="button" class="btn btn-outline-primary" onclick="scrollToSection('mind')">Mind</button>
+        <button type="button" class="btn btn-outline-primary" onclick="scrollToSection('emotion')">Emotion</button>
+        <button type="button" class="btn btn-outline-primary" onclick="scrollToSection('spiritual')">Spiritual</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Form -->
+  <form id="kundaliniForm" class="container flex-grow-1">
+    <div class="row g-4">
+      <!-- Physical State -->
+      <section id="physical" class="col-lg-6">
+        <div class="card p-4">
+          <h4 class="mb-3">🌿 Physical State</h4>
+          <div class="row g-3">
+            <div class="col-6">
+              <label for="q1" class="form-label">Energized?</label>
+              <select class="form-select" id="q1">
+                <option value="2">Low</option>
+                <option value="5">Moderate</option>
+                <option value="8">High</option>
+                <option value="10">Radiant</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="q2" class="form-label">Sleep Quality</label>
+              <select class="form-select" id="q2">
+                <option value="3">Poor</option>
+                <option value="6">Average</option>
+                <option value="9">Deep</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="q3" class="form-label">Body Connection</label>
+              <select class="form-select" id="q3">
+                <option value="3">Disconnected</option>
+                <option value="6">Aware</option>
+                <option value="9">Deeply Tuned</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="heartRate" class="form-label">Heart Rate (BPM)</label>
+              <input type="number" id="heartRate" class="form-control" placeholder="e.g., 72" />
+            </div>
+            <div class="col-6">
+              <label for="oxygen" class="form-label">Oxygen Level (%)</label>
+              <input type="number" id="oxygen" class="form-control" placeholder="e.g., 98" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Breath & Prana -->
+      <section id="breath" class="col-lg-6">
+        <div class="card p-4">
+          <h4 class="mb-3">🌬️ Breath & Prana</h4>
+          <div class="row g-3">
+            <div class="col-6">
+              <label for="q6" class="form-label">Breathing Depth</label>
+              <select id="q6" class="form-select">
+                <option value="3">Shallow</option>
+                <option value="6">Steady</option>
+                <option value="9">Deep</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="q7" class="form-label">Nostril Balance</label>
+              <select id="q7" class="form-select">
+                <option value="5">Left (Ida)</option>
+                <option value="5">Right (Pingala)</option>
+                <option value="10">Balanced</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="q8" class="form-label">Spinal Vibration</label>
+              <select id="q8" class="form-select">
+                <option value="2">No</option>
+                <option value="6">Slight</option>
+                <option value="10">Strong</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mind & Focus -->
+      <section id="mind" class="col-lg-6">
+        <div class="card p-4 mt-4 mt-lg-0">
+          <h4 class="mb-3">🧠 Mind & Focus</h4>
+          <div class="row g-3">
+            <div class="col-6">
+              <label for="q9" class="form-label">Focus Duration</label>
+              <select id="q9" class="form-select">
+                <option value="3">&lt;5 min</option>
+                <option value="6">5–15 min</option>
+                <option value="9">&gt;15 min</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="q10" class="form-label">Mind Clarity</label>
+              <select id="q10" class="form-select">
+                <option value="3">Cloudy</option>
+                <option value="6">Calm</option>
+                <option value="9">Crystal Clear</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="q11" class="form-label">Mind Wandering</label>
+              <select id="q11" class="form-select">
+                <option value="3">Often</option>
+                <option value="6">Sometimes</option>
+                <option value="9">Rarely</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Emotion & Balance -->
+      <section id="emotion" class="col-lg-6">
+        <div class="card p-4 mt-4 mt-lg-0">
+          <h4 class="mb-3">💗 Emotion & Balance</h4>
+          <div class="row g-3">
+            <div class="col-6">
+              <label for="q12" class="form-label">Emotional Stability</label>
+              <select id="q12" class="form-select">
+                <option value="3">Unstable</option>
+                <option value="6">Neutral</option>
+                <option value="9">Peaceful</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="q13" class="form-label">Stress Level</label>
+              <select id="q13" class="form-select">
+                <option value="2">High</option>
+                <option value="6">Moderate</option>
+                <option value="9">Low</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="q14" class="form-label">Compassion</label>
+              <select id="q14" class="form-select">
+                <option value="2">Irritable</option>
+                <option value="6">Normal</option>
+                <option value="9">Deeply Kind</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spiritual Awareness -->
+      <section id="spiritual" class="col-lg-12">
+        <div class="card p-4 mt-4">
+          <h4 class="mb-3">🌌 Spiritual Awareness</h4>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="q15" class="form-label">Meditation Depth</label>
+              <select id="q15" class="form-select">
+                <option value="3">Surface</option>
+                <option value="6">Calm</option>
+                <option value="9">Deep</option>
+                <option value="10">Transcendent</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="q16" class="form-label">Intuition/Synchronicity</label>
+              <select id="q16" class="form-select">
+                <option value="2">No</option>
+                <option value="6">Occasionally</option>
+                <option value="9">Frequently</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="q17" class="form-label">Alignment with Purpose</label>
+              <select id="q17" class="form-select">
+                <option value="3">Not Yet</option>
+                <option value="6">Partially</option>
+                <option value="9">Fully</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Save Button -->
+      <div class="col-12 d-flex justify-content-center mt-5 mb-5">
+        <button type="button" class="btn btn-primary btn-lg" onclick="saveEntry()">💾 Save & Show Progress</button>
+      </div>
+    </div>
+  </form>
+
+  <hr class="my-4" />
+
+  <!-- Results Section -->
+  <div class="container mb-4">
+    <div id="resultsSection"></div>
+  </div>
+
+  <!-- Historical Progress -->
+  <div class="container pb-5">
+    <div class="card p-4">
+      <h4 class="mb-4">📊 Historical Progress</h4>
+      <div id="historyTable" class="mb-4"></div>
+      <canvas id="progressChart" style="max-height: 300px;"></canvas>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-auto">
+    <small>© 2025 Kundalini Tantra Tracker | Track Your Spiritual Journey</small>
+  </footer>
+
+  <!-- Night/Day Toggle Button -->
+  <button class="toggle-btn" onclick="toggleDarkMode()" id="toggleBtn">🌙 Night Mode</button>
+
+  <script>
+    // Smooth scroll to section
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Get form value
+    function getVal(id) {
+      return Number(document.getElementById(id).value);
+    }
+
+    // Save Entry and Calculate Scores
+    function saveEntry() {
+      const HR = Number(document.getElementById('heartRate').value) || 70;
+      const SpO2 = Number(document.getElementById('oxygen').value) || 98;
+
+      // Heart Rate Score (optimal around 60-70 BPM)
+      const HR_Score = Math.max(0, Math.min(10, 10 - Math.abs(HR - 65) / 4));
+      // Oxygen Score (should be 95-100%)
+      const Oxy_Score = Math.max(0, Math.min(10, (SpO2 - 90) * 1.25));
+
+      // Calculate section scores
+      const PS = (getVal('q1') + getVal('q2') + getVal('q3') + HR_Score + Oxy_Score) / 5;
+      const PR = (getVal('q6') + getVal('q7') + getVal('q8')) / 3;
+      const MS = (getVal('q9') + getVal('q10') + getVal('q11')) / 3;
+      const ES = (getVal('q12') + getVal('q13') + getVal('q14')) / 3;
+      const SS = (getVal('q15') + getVal('q16') + getVal('q17')) / 3;
+
+      // Overall KPI
+      const KPI = ((PS + PR + MS + ES + SS) / 5).toFixed(2);
+      const today = new Date().toISOString().split('T')[0];
+
+      // Save to localStorage
+      let db = JSON.parse(localStorage.getItem('kundaliniDB') || '[]');
+      db.push({
+        date: today,
+        q1: getVal('q1'),
+        q2: getVal('q2'),
+        q3: getVal('q3'),
+        heartRate: HR,
+        oxygen: SpO2,
+        q6: getVal('q6'),
+        q7: getVal('q7'),
+        q8: getVal('q8'),
+        q9: getVal('q9'),
+        q10: getVal('q10'),
+        q11: getVal('q11'),
+        q12: getVal('q12'),
+        q13: getVal('q13'),
+        q14: getVal('q14'),
+        q15: getVal('q15'),
+        q16: getVal('q16'),
+        q17: getVal('q17'),
+        PS,
+        PR,
+        MS,
+        ES,
+        SS,
+        KPI: Number(KPI),
+      });
+      localStorage.setItem('kundaliniDB', JSON.stringify(db));
+
+      // Show results and update charts
+      showResults(db);
+      scrollToSection('resultsSection');
+    }
+
+    // Get Kundalini Stage
+    function getStage(KPI) {
+      if (KPI < 5) return "Dormant Energy (Muladhara)";
+      if (KPI < 7) return "Awakening (Swadhisthana)";
+      if (KPI < 8.5) return "Rising (Anahata)";
+      if (KPI < 9.5) return "Harmonizing (Ajna)";
+      return "Unified Consciousness (Sahasrara)";
+    }
+
+    // Get Stage Description
+    function getStageDesc(stage) {
+      const desc = {
+        "Dormant Energy (Muladhara)": "Focus on grounding, rest and basic yoga postures.",
+        "Awakening (Swadhisthana)": "Energy is rising; start pranayama and emotional balance.",
+        "Rising (Anahata)": "Heart opening; maintain meditation and breath awareness.",
+        "Harmonizing (Ajna)": "Deep clarity and spiritual alignment; mindful living is key.",
+        "Unified Consciousness (Sahasrara)": "Full integration; maintain witness state and selfless service.",
+      };
+      return desc[stage];
+    }
+
+    // Show Results
+    function showResults(db) {
+      const latest = db[db.length - 1];
+      let improvementText = "";
+
+      if (db.length > 1) {
+        const prev = db[db.length - 2].KPI;
+        const diff = ((latest.KPI - prev) / prev) * 100;
+        improvementText =
+          diff >= 0
+            ? `📈 Improved by +${Math.abs(diff).toFixed(1)}% since yesterday!`
+            : `📉 Decreased by ${Math.abs(diff).toFixed(1)}%`;
+      }
+
+      const stage = getStage(latest.KPI);
+
+      // Chakra layers with scores and tips
+      const layers = [
+        {
+          name: "Physical (Muladhara)",
+          score: latest.PS,
+          color: "#e74c3c",
+          tip: "Ground yourself; sleep and exercise.",
+        },
+        {
+          name: "Prana (Swadhisthana/Manipura)",
+          score: latest.PR,
+          color: "#e67e22",
+          tip: "Practice pranayama and balance energy.",
+        },
+        {
+          name: "Mind (Ajna)",
+          score: latest.MS,
+          color: "#3498db",
+          tip: "Meditation and mental clarity exercises.",
+        },
+        {
+          name: "Emotion (Anahata)",
+          score: latest.ES,
+          color: "#2ecc71",
+          tip: "Journaling, gratitude, emotional awareness.",
+        },
+        {
+          name: "Spiritual (Sahasrara)",
+          score: latest.SS,
+          color: "#9b59b6",
+          tip: "Deep meditation and selfless practice.",
+        },
+      ];
+
+      const chakraHTML = layers
+        .map(
+          (l) => `
+        <div class="mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong>${l.name}</strong>
+            <span class="badge bg-primary">${l.score.toFixed(1)}/10</span>
+          </div>
+          <div class="progress" style="height: 26px; border-radius: 13px;">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              style="width: ${Math.min(l.score * 10, 100)}%; background-color: ${l.color};"
+              aria-valuenow="${l.score * 10}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >${l.score.toFixed(1)}</div>
+          </div>
+          <small class="text-muted d-block mt-2">💡 ${l.tip}</small>
+        </div>
+      `
+        )
+        .join("");
+
+      // Generate suggestions
+      const suggestions = [];
+      if (latest.KPI < 5)
+        suggestions.push("Focus on grounding exercises and consistent sleep.");
+      else if (latest.KPI < 7)
+        suggestions.push("Practice pranayama and meditation regularly.");
+      else if (latest.KPI < 8.5)
+        suggestions.push("Deepen meditation and balance emotions.");
+      else if (latest.KPI < 9.5)
+        suggestions.push("Maintain mindfulness and spiritual practice.");
+      else suggestions.push("Continue selfless service and awareness practice.");
+
+      const weakest = Object.entries({
+        PS: latest.PS,
+        PR: latest.PR,
+        MS: latest.MS,
+        ES: latest.ES,
+        SS: latest.SS,
+      }).reduce((a, b) => (a[1] < b[1] ? a : b));
+
+      if (weakest[0] === "PS")
+        suggestions.push("🌍 Muladhara weak: do grounding yoga, Moolabandha.");
+      if (weakest[0] === "PR")
+        suggestions.push("💨 Prana weak: practice Nadi Shodhana and breath control.");
+      if (weakest[0] === "MS")
+        suggestions.push("🧠 Mind weak: meditation and focus exercises.");
+      if (weakest[0] === "ES")
+        suggestions.push("❤️ Emotion weak: journaling and gratitude practice.");
+      if (weakest[0] === "SS")
+        suggestions.push("✨ Spiritual weak: deepen meditation and mantra chanting.");
+
+      document.getElementById(
+        "resultsSection"
+      ).innerHTML = `
+        <div class="card p-4 mb-4">
+          <h4>🪔 Kundalini Energy Summary</h4>
+          <p class="fs-5 mb-2"><strong>KPI Score: ${latest.KPI} / 10</strong></p>
+          <p class="fs-6 mb-3">Stage: <strong>${stage}</strong></p>
+          <p class="text-muted mb-0">${improvementText}</p>
+        </div>
+
+        <div class="card p-4 mb-4">
+          <h4>🌈 Chakra-wise Analysis</h4>
+          ${chakraHTML}
+        </div>
+
+        <div class="card p-4">
+          <h4>💫 Personalized Suggestions</h4>
+          <p>${getStageDesc(stage)}</p>
+          <ul class="mt-3">
+            ${suggestions.map((s) => `<li>${s}</li>`).join("")}
+          </ul>
+        </div>
+      `;
+
+      showHistory(db);
+      renderChart(db);
+    }
+
+    // Show History Table
+    function showHistory(db) {
+      let tableHTML = `<table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>KPI</th>
+            <th>Physical</th>
+            <th>Prana</th>
+            <th>Mind</th>
+            <th>Emotion</th>
+            <th>Spiritual</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      db.forEach((d) => {
+        tableHTML += `<tr>
+          <td>${d.date}</td>
+          <td><strong>${d.KPI}</strong></td>
+          <td>${d.PS.toFixed(2)}</td>
+          <td>${d.PR.toFixed(2)}</td>
+          <td>${d.MS.toFixed(2)}</td>
+          <td>${d.ES.toFixed(2)}</td>
+          <td>${d.SS.toFixed(2)}</td>
+        </tr>`;
+      });
+
+      tableHTML += `</tbody></table>`;
+      document.getElementById("historyTable").innerHTML = tableHTML;
+    }
+
+    // Render Chart
+    function renderChart(db) {
+      const labels = db.map((d) => d.date);
+      const kpiData = db.map((d) => d.KPI);
+      const psData = db.map((d) => d.PS);
+      const prData = db.map((d) => d.PR);
+      const msData = db.map((d) => d.MS);
+      const esData = db.map((d) => d.ES);
+      const ssData = db.map((d) => d.SS);
+
+      const ctx = document.getElementById("progressChart").getContext("2d");
+      if (window.kpiChart) window.kpiChart.destroy();
+
+      window.kpiChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "KPI (Overall)",
+              data: kpiData,
+              borderColor: "#7145c5",
+              backgroundColor: "rgba(113, 69, 197, 0.1)",
+              fill: true,
+              tension: 0.4,
+              pointRadius: 5,
+              pointHoverRadius: 8,
+              pointBackgroundColor: "#7145c5",
+              pointBorderColor: "#fff",
+              pointBorderWidth: 2,
+              borderWidth: 3,
+            },
+            {
+              label: "Physical",
+              data: psData,
+              borderColor: "#e74c3c",
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            },
+            {
+              label: "Prana",
+              data: prData,
+              borderColor: "#e67e22",
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            },
+            {
+              label: "Mind",
+              data: msData,
+              borderColor: "#3498db",
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            },
+            {
+              label: "Emotion",
+              data: esData,
+              borderColor: "#2ecc71",
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            },
+            {
+              label: "Spiritual",
+              data: ssData,
+              borderColor: "#9b59b6",
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              display: true,
+              position: "top",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 10,
+              ticks: {
+                stepSize: 1,
+              },
+            },
+          },
+          animation: {
+            duration: 700,
+            easing: 'easeInOutQuart',
+          },
+        },
+      });
+    }
+
+    // Toggle Dark/Light Mode
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const btn = document.getElementById("toggleBtn");
+
+      if (html.classList.contains("night-mode")) {
+        html.classList.remove("night-mode");
+        btn.textContent = "🌙 Night Mode";
+        localStorage.setItem("kundaliniTheme", "light");
+      } else {
+        html.classList.add("night-mode");
+        btn.textContent = "☀️ Day Mode";
+        localStorage.setItem("kundaliniTheme", "night");
+      }
+    }
+
+    // Load data and theme on page load
+    window.onload = () => {
+      const db = JSON.parse(localStorage.getItem("kundaliniDB") || "[]");
+      if (db.length) showResults(db);
+
+      const theme = localStorage.getItem("kundaliniTheme") || "light";
+      if (theme === "night") {
+        document.documentElement.classList.add("night-mode");
+        document.getElementById("toggleBtn").textContent = "☀️ Day Mode";
+      }
+    };
+  </script>
+</body>
+
+</html>

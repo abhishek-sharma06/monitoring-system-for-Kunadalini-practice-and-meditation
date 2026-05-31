@@ -1,0 +1,2997 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kundalini Tantra — Guidance Section</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --secondary: #a78bfa;
+      --accent: #f472b6;
+      --accent-gold: #fbbf24;
+      --bg-primary: #0f0a1f;
+      --bg-secondary: #1a1230;
+      --bg-card: rgba(26, 18, 48, 0.8);
+      --text-primary: #f8fafc;
+      --text-secondary: #a5b4c3;
+      --text-muted: #6b7b8c;
+      --glass: rgba(139, 92, 246, 0.1);
+      --glass-border: rgba(139, 92, 246, 0.2);
+      --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 50%, #f472b6 100%);
+      --gradient-bg: linear-gradient(180deg, #0f0a1f 0%, #1a1230 50%, #0f0a1f 100%);
+      --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.3);
+      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Chakra Colors */
+      --chakra-root: #ef4444;
+      --chakra-sacral: #f97316;
+      --chakra-solar: #eab308;
+      --chakra-heart: #22c55e;
+      --chakra-throat: #06b6d4;
+      --chakra-third: #6366f1;
+      --chakra-crown: #a855f7;
+
+      /* Spacing System */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+    }
+
+    /* LIGHT THEME */
+    [data-theme="light"] {
+      --primary: #7c3aed;
+      --primary-dark: #6d28d9;
+      --secondary: #8b5cf6;
+      --accent: #ec4899;
+      --accent-gold: #f59e0b;
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --glass: rgba(139, 92, 246, 0.05);
+      --glass-border: rgba(139, 92, 246, 0.15);
+      --gradient-bg: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%);
+      --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.2);
+      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--gradient-bg);
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: var(--transition);
+      line-height: 1.6;
+    }
+
+    /* Animated Background */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+
+      90% {
+        opacity: 0.1;
+      }
+
+      100% {
+        transform: translateY(-100px) translateX(50px) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .energy-ring {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(139, 92, 246, 0.1);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: pulse-ring 8s infinite ease-in-out;
+    }
+
+    .energy-ring:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      animation-delay: 1s;
+    }
+
+    .energy-ring:nth-child(3) {
+      width: 200px;
+      height: 200px;
+      animation-delay: 2s;
+    }
+
+    @keyframes pulse-ring {
+
+      0%,
+      100% {
+        opacity: 0.2;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .display-heading {
+      font-size: clamp(2rem, 5vw, 3rem);
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--space-md);
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .glass-card:hover::before {
+      left: 100%;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow), var(--shadow-card);
+      border-color: rgba(139, 92, 246, 0.4);
+    }
+
+    /* Header */
+    .main-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: var(--space-md) 0;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gradient-primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    /* Buttons */
+    .btn-glow {
+      background: var(--gradient-primary);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-glow:hover::before {
+      left: 100%;
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-ghost:hover {
+      background: var(--glass);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-icon:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .btn-icon i {
+      transition: transform 0.3s ease;
+    }
+
+    .btn-icon:active i {
+      transform: rotate(360deg);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      padding: var(--space-2xl) 0;
+      z-index: 1;
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .hero-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .tag {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--secondary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tag:hover,
+    .tag.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    /* Stats Cards */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+
+    .stat-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: var(--space-lg);
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: var(--space-xs);
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      position: sticky;
+      top: 100px;
+    }
+
+    .nav-card {
+      padding: var(--space-lg);
+    }
+
+    .nav-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: var(--space-md);
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-item {
+      margin-bottom: var(--space-sm);
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0;
+      background: var(--gradient-primary);
+      border-radius: 3px;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-primary);
+      background: var(--glass);
+    }
+
+    .nav-link.active::before {
+      height: 60%;
+    }
+
+    .nav-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      background: var(--glass);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover .nav-icon,
+    .nav-link.active .nav-icon {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+    /* Section Cards */
+    .section-card {
+      padding: var(--space-xl);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Chakra Circles */
+    .chakra-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      position: relative;
+      flex-shrink: 0;
+      animation: chakra-pulse 3s infinite ease-in-out;
+    }
+
+    @keyframes chakra-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 currentColor;
+      }
+
+      50% {
+        box-shadow: 0 0 20px 5px transparent;
+      }
+    }
+
+    .chakra-root {
+      background: linear-gradient(135deg, var(--chakra-root), #dc2626);
+      color: white;
+    }
+
+    .chakra-sacral {
+      background: linear-gradient(135deg, var(--chakra-sacral), #ea580c);
+      color: white;
+    }
+
+    .chakra-solar {
+      background: linear-gradient(135deg, var(--chakra-solar), #ca8a04);
+      color: white;
+    }
+
+    .chakra-heart {
+      background: linear-gradient(135deg, var(--chakra-heart), #16a34a);
+      color: white;
+    }
+
+    .chakra-throat {
+      background: linear-gradient(135deg, var(--chakra-throat), #0891b2);
+      color: white;
+    }
+
+    .chakra-third {
+      background: linear-gradient(135deg, var(--chakra-third), #4f46e5);
+      color: white;
+    }
+
+    .chakra-crown {
+      background: linear-gradient(135deg, var(--chakra-crown), #9333ea);
+      color: white;
+    }
+
+    /* Chakra List in Intro */
+    .chakra-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .chakra-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-sm) 0;
+    }
+
+    .chakra-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .chakra-icon i {
+      font-size: 0.5rem;
+      color: white;
+    }
+
+    .chakra-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .chakra-link:hover {
+      color: var(--primary);
+    }
+
+    .chakra-link .external-icon {
+      font-size: 0.7rem;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .chakra-link:hover .external-icon {
+      opacity: 1;
+    }
+
+    /* Chakra Cards - ENHANCED with Navigation */
+    .chakra-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: var(--space-lg);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+      height: 100%;
+    }
+
+    .chakra-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+    }
+
+    .chakra-card::after {
+      content: '\f105';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: var(--space-lg);
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: var(--transition);
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    .chakra-card:hover::after {
+      opacity: 1;
+      right: var(--space-md);
+    }
+
+    .chakra-name {
+      font-weight: 600;
+      margin-top: var(--space-sm);
+      font-size: 0.95rem;
+    }
+
+    .chakra-mantra {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
+
+    .chakra-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: var(--space-sm);
+      line-height: 1.5;
+    }
+
+    .chakra-badge {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      background: rgba(139, 92, 246, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      color: var(--secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Video Card */
+    .video-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.1));
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .video-card:hover {
+      transform: scale(1.02);
+    }
+
+    .video-card:hover .play-btn {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    }
+
+    .play-btn {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      transition: var(--transition);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+
+    .video-duration {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 0.25rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+    }
+
+    /* Practice Cards */
+    .practice-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: var(--space-lg);
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .practice-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    .practice-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .practice-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
+    }
+
+    .practice-meta {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item i {
+      color: var(--secondary);
+    }
+
+    .practice-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: var(--space-md);
+      flex-grow: 1;
+    }
+
+    .intensity-bar {
+      display: flex;
+      gap: 4px;
+      margin-bottom: var(--space-md);
+    }
+
+    .intensity-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--glass-border);
+    }
+
+    .intensity-dot.active {
+      background: var(--accent-gold);
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+
+    .checklist-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    .checklist-icon.do {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .checklist-icon.dont {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+
+    .checklist-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* Journal Area */
+    .journal-textarea {
+      width: 100%;
+      min-height: 180px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: var(--space-md);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      resize: vertical;
+      transition: var(--transition);
+    }
+
+    .journal-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+    }
+
+    .journal-textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Prompt Cards */
+    .prompt-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: var(--space-md);
+      margin-bottom: var(--space-sm);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .prompt-card:hover {
+      border-color: var(--primary);
+      background: rgba(139, 92, 246, 0.1);
+    }
+
+    .prompt-icon {
+      margin-right: var(--space-sm);
+      color: var(--secondary);
+    }
+
+    /* Wisdom Card */
+    .wisdom-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(244, 114, 182, 0.1));
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: var(--space-xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wisdom-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text-primary);
+      margin-bottom: var(--space-md);
+      transition: opacity 0.5s ease;
+    }
+
+    .wisdom-author {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      transition: opacity 0.5s ease;
+    }
+
+    .wisdom-icon {
+      font-size: 3rem;
+      color: rgba(139, 92, 246, 0.2);
+      position: absolute;
+      top: var(--space-md);
+      left: var(--space-lg);
+    }
+
+    /* Progress Section */
+    .progress-ring {
+      width: 120px;
+      height: 120px;
+      position: relative;
+    }
+
+    .progress-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+    }
+
+    .progress-ring .bg {
+      stroke: var(--glass-border);
+    }
+
+    .progress-ring .progress {
+      stroke: url(#progressGradient);
+      stroke-dasharray: 314;
+      stroke-dashoffset: 314;
+      transition: stroke-dashoffset 1s ease;
+    }
+
+    .progress-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .progress-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .progress-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* Recommendation Card */
+    .recommendation-card {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(6, 182, 212, 0.1));
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 16px;
+      padding: var(--space-lg);
+    }
+
+    .recommendation-title {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.85rem;
+      color: #22c55e;
+      margin-bottom: var(--space-sm);
+    }
+
+    .recommendation-text {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* Floating Action Button */
+    .fab-container {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 1050;
+    }
+
+    .fab {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+      transition: var(--transition);
+    }
+
+    .fab:hover {
+      transform: scale(1.1);
+    }
+
+    .fab-container.open .fab {
+      transform: rotate(45deg);
+    }
+
+    .fab-menu {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+
+    .fab-container.open .fab-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .fab-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      justify-content: flex-end;
+    }
+
+    .fab-item-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .fab-item-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .fab-item-label {
+      background: var(--bg-card);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    /* Toast Notifications */
+    .toast-container {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .toast {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 280px;
+      animation: slideIn 0.4s ease, fadeOut 0.4s ease 3.6s forwards;
+      box-shadow: var(--shadow-card);
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    .toast-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .toast.success .toast-icon {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .toast.info .toast-icon {
+      background: rgba(139, 92, 246, 0.2);
+      color: var(--primary);
+    }
+
+    .toast.warning .toast-icon {
+      background: rgba(251, 191, 36, 0.2);
+      color: var(--accent-gold);
+    }
+
+    .toast-content {
+      flex: 1;
+    }
+
+    .toast-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .toast-message {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      padding: var(--space-md);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: var(--space-2xl);
+      max-width: 480px;
+      width: 100%;
+      transform: scale(0.9);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--glass);
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Timer Circle */
+    .timer-circle {
+      width: 200px;
+      height: 200px;
+      margin: var(--space-xl) auto;
+      position: relative;
+    }
+
+    .timer-circle svg {
+      transform: rotate(-90deg);
+    }
+
+    .timer-circle circle {
+      fill: none;
+      stroke-width: 6;
+      stroke-linecap: round;
+    }
+
+    .timer-circle .timer-bg {
+      stroke: var(--glass-border);
+    }
+
+    .timer-circle .timer-progress {
+      stroke: url(#timerGradient);
+      stroke-dasharray: 565;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    .timer-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .timer-time {
+      font-size: 2.5rem;
+      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .timer-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Section Divider */
+    .section-divider {
+      border-top: 1px solid var(--glass-border);
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+    }
+
+    /* Info Box */
+    .info-box {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: var(--space-md);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .info-box i {
+      color: var(--secondary);
+      margin-top: 2px;
+    }
+
+    .info-box p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      .sidebar {
+        position: static;
+        margin-bottom: var(--space-xl);
+      }
+
+      .stats-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .hero-section {
+        padding: var(--space-xl) 0;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+
+      .section-card {
+        padding: var(--space-lg);
+      }
+
+      .section-header {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .hero-section {
+        padding: var(--space-lg) 0;
+      }
+
+      .fab-container {
+        right: 16px;
+        bottom: 16px;
+      }
+
+      .modal-content {
+        padding: var(--space-lg);
+      }
+
+      .header-buttons {
+        gap: var(--space-sm) !important;
+      }
+
+      .btn-ghost,
+      .btn-glow {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--glass-border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Loading Animation */
+    .skeleton {
+      background: linear-gradient(90deg, var(--glass) 25%, var(--glass-border) 50%, var(--glass) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    /* Intro Section Two Column Layout */
+    .intro-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+
+    @media (max-width: 767px) {
+      .intro-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Effects -->
+  <div class="bg-particles" id="particles"></div>
+  <div class="energy-ring"></div>
+  <div class="energy-ring"></div>
+  <div class="energy-ring"></div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-om"></i>
+          </div>
+          <span class="logo-text">Kundalini Tantra</span>
+        </div>
+        <div class="d-flex align-items-center header-buttons gap-2">
+          <button class="btn-ghost d-none d-md-flex" id="guidedModeBtn">
+            <i class="fas fa-magic me-2"></i> Guided Mode
+          </button>
+          <button class="btn-glow" id="saveProgressBtn">
+            <i class="fas fa-bookmark me-2"></i> Save Progress
+          </button>
+          <button class="btn-icon" id="themeToggle" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container py-4" style="position: relative; z-index: 1;">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <div class="hero-content">
+            <h1 class="display-heading">Prepare. Practice. Integrate.</h1>
+            <p class="hero-subtitle">
+              Embark on a transformative journey through ancient Kundalini practices.
+              Each section offers guided videos, step-by-step instructions, and mindful safety protocols.
+            </p>
+            <div class="tag-group">
+              <span class="tag active" data-section="intro"><i class="fas fa-seedling me-1"></i> Introduction</span>
+              <span class="tag" data-section="safety"><i class="fas fa-shield-alt me-1"></i> Safety</span>
+              <span class="tag" data-section="techniques"><i class="fas fa-dharmachakra me-1"></i> Practices</span>
+              <span class="tag" data-section="integration"><i class="fas fa-infinity me-1"></i> Integration</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="stats-container">
+            <div class="stat-card">
+              <div class="stat-value" id="sessionsCount">0</div>
+              <div class="stat-label">Sessions Completed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="streakCount">0</div>
+              <div class="stat-label">Day Streak</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="minutesCount">0</div>
+              <div class="stat-label">Minutes Practiced</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Layout -->
+    <div class="row g-4">
+      <!-- Sidebar -->
+      <div class="col-lg-3">
+        <div class="sidebar">
+          <nav class="glass-card nav-card">
+            <div class="nav-title">Navigation</div>
+            <ul class="nav-list">
+              <li class="nav-item">
+                <a class="nav-link active" data-target="intro">
+                  <span class="nav-icon"><i class="fas fa-sun"></i></span>
+                  Introduction
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-target="prep">
+                  <span class="nav-icon"><i class="fas fa-leaf"></i></span>
+                  Preparation
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-target="safety">
+                  <span class="nav-icon"><i class="fas fa-shield-alt"></i></span>
+                  Safety
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-target="stages">
+                  <span class="nav-icon"><i class="fas fa-layer-group"></i></span>
+                  Chakra Stages
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-target="techniques">
+                  <span class="nav-icon"><i class="fas fa-dharmachakra"></i></span>
+                  Techniques
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-target="integration">
+                  <span class="nav-icon"><i class="fas fa-feather-alt"></i></span>
+                  Integration
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-target="teacher">
+                  <span class="nav-icon"><i class="fas fa-book-open"></i></span>
+                  Wisdom
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-target="progress">
+                  <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+                  Progress
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Main Sections -->
+      <div class="col-lg-9">
+        <div class="main-content">
+          <!-- Introduction Section -->
+          <section id="intro" class="glass-card section-card">
+            <div class="section-header">
+              <div class="section-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+                <i class="fas fa-sun text-white"></i>
+              </div>
+              <div>
+                <h2 class="section-title">Introduction to Kundalini Tantra</h2>
+                <p class="section-desc">
+                  Discover the ancient science of awakening dormant spiritual energy.
+                  Learn about the subtle body, energy channels, and the sacred path of transformation.
+                </p>
+              </div>
+            </div>
+
+            <div class="intro-content">
+              <!-- Video Section -->
+              <div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/D88X4ZkQIBw?si=GVWNh7ON8ebAhB4Q"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+
+              <!-- Chakra List -->
+              <div>
+                <h6 class="mb-3" style="color: var(--secondary);">
+                  <i class="fas fa-circle-notch me-2"></i>The Seven Chakras
+                </h6>
+                <ul class="chakra-list">
+                  <li class="chakra-item">
+                    <span class="chakra-icon" style="background: linear-gradient(135deg, #dc2626, #991b1b);">
+                      <i class="fas fa-circle"></i>
+                    </span>
+                    <a href="https://en.wikipedia.org/wiki/Muladhara" target="_blank" class="chakra-link">
+                      Muladhara (Root Chakra)
+                      <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                  </li>
+                  <li class="chakra-item">
+                    <span class="chakra-icon" style="background: linear-gradient(135deg, #ea580c, #c2410c);">
+                      <i class="fas fa-circle"></i>
+                    </span>
+                    <a href="https://en.wikipedia.org/wiki/Svadhisthana" target="_blank" class="chakra-link">
+                      Svadhisthana (Sacral Chakra)
+                      <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                  </li>
+                  <li class="chakra-item">
+                    <span class="chakra-icon" style="background: linear-gradient(135deg, #eab308, #ca8a04);">
+                      <i class="fas fa-circle"></i>
+                    </span>
+                    <a href="https://en.wikipedia.org/wiki/Manipura" target="_blank" class="chakra-link">
+                      Manipura (Solar Plexus Chakra)
+                      <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                  </li>
+                  <li class="chakra-item">
+                    <span class="chakra-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                      <i class="fas fa-circle"></i>
+                    </span>
+                    <a href="https://en.wikipedia.org/wiki/Anahata" target="_blank" class="chakra-link">
+                      Anahata (Heart Chakra)
+                      <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                  </li>
+                  <li class="chakra-item">
+                    <span class="chakra-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                      <i class="fas fa-circle"></i>
+                    </span>
+                    <a href="https://en.wikipedia.org/wiki/Vishuddha" target="_blank" class="chakra-link">
+                      Vishuddha (Throat Chakra)
+                      <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                  </li>
+                  <li class="chakra-item">
+                    <span class="chakra-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">
+                      <i class="fas fa-circle"></i>
+                    </span>
+                    <a href="https://en.wikipedia.org/wiki/Ajna" target="_blank" class="chakra-link">
+                      Ajna (Third Eye Chakra)
+                      <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                  </li>
+                  <li class="chakra-item">
+                    <span class="chakra-icon" style="background: linear-gradient(135deg, #a855f7, #9333ea);">
+                      <i class="fas fa-circle"></i>
+                    </span>
+                    <a href="https://en.wikipedia.org/wiki/Sahasrara" target="_blank" class="chakra-link">
+                      Sahasrara (Crown Chakra)
+                      <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Preparation Section -->
+          <section id="prep" class="glass-card section-card">
+            <div class="section-header">
+              <div class="section-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                <i class="fas fa-leaf text-white"></i>
+              </div>
+              <div>
+                <h2 class="section-title">Preparation & Lifestyle</h2>
+                <p class="section-desc">
+                  Create a supportive foundation for your practice through daily routines,
+                  mindful nutrition, and environmental preparation.
+                </p>
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="practice-card">
+                  <div class="practice-icon"
+                    style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.1));">
+                    <i class="fas fa-sun" style="color: #fbbf24;"></i>
+                  </div>
+                  <h6 class="practice-title">Morning Sadhana</h6>
+                  <ol class="ps-3 mb-0" style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
+                    <li>Wake before sunrise, hydrate with warm water</li>
+                    <li>5-10 min breathing practice (Pranayama)</li>
+                    <li>10-15 min gentle asana sequence</li>
+                    <li>10 min seated meditation</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="practice-card">
+                  <div class="practice-icon"
+                    style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(167, 139, 250, 0.1));">
+                    <i class="fas fa-check-circle" style="color: var(--primary);"></i>
+                  </div>
+                  <h6 class="practice-title">Pre-Practice Checklist</h6>
+                  <ul class="checklist mb-0">
+                    <li class="checklist-item">
+                      <span class="checklist-icon do"><i class="fas fa-check"></i></span>
+                      <span class="checklist-text">Empty or light stomach</span>
+                    </li>
+                    <li class="checklist-item">
+                      <span class="checklist-icon do"><i class="fas fa-check"></i></span>
+                      <span class="checklist-text">Quiet, clean space prepared</span>
+                    </li>
+                    <li class="checklist-item">
+                      <span class="checklist-icon do"><i class="fas fa-check"></i></span>
+                      <span class="checklist-text">Phone on silent, journal ready</span>
+                    </li>
+                    <li class="checklist-item">
+                      <span class="checklist-icon do"><i class="fas fa-check"></i></span>
+                      <span class="checklist-text">Clear intention set</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Safety Section -->
+          <section id="safety" class="glass-card section-card">
+            <div class="section-header">
+              <div class="section-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                <i class="fas fa-shield-alt text-white"></i>
+              </div>
+              <div>
+                <h2 class="section-title">Safety & Warnings</h2>
+                <p class="section-desc">
+                  Essential guidelines to ensure a safe and grounded practice.
+                  Know when to pause, seek guidance, or consult professionals.
+                </p>
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-md-6">
+                <h6 style="color: #22c55e;" class="mb-3"><i class="fas fa-check-circle me-2"></i>Do's</h6>
+                <ul class="checklist">
+                  <li class="checklist-item">
+                    <span class="checklist-icon do"><i class="fas fa-check"></i></span>
+                    <span class="checklist-text">Proceed slowly and mindfully</span>
+                  </li>
+                  <li class="checklist-item">
+                    <span class="checklist-icon do"><i class="fas fa-check"></i></span>
+                    <span class="checklist-text">Practice regular grounding exercises</span>
+                  </li>
+                  <li class="checklist-item">
+                    <span class="checklist-icon do"><i class="fas fa-check"></i></span>
+                    <span class="checklist-text">Keep a detailed practice journal</span>
+                  </li>
+                  <li class="checklist-item">
+                    <span class="checklist-icon do"><i class="fas fa-check"></i></span>
+                    <span class="checklist-text">Rest when your body asks</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h6 style="color: #ef4444;" class="mb-3"><i class="fas fa-times-circle me-2"></i>Don'ts</h6>
+                <ul class="checklist">
+                  <li class="checklist-item">
+                    <span class="checklist-icon dont"><i class="fas fa-times"></i></span>
+                    <span class="checklist-text">Force intense practices prematurely</span>
+                  </li>
+                  <li class="checklist-item">
+                    <span class="checklist-icon dont"><i class="fas fa-times"></i></span>
+                    <span class="checklist-text">Ignore prolonged physical or emotional distress</span>
+                  </li>
+                  <li class="checklist-item">
+                    <span class="checklist-icon dont"><i class="fas fa-times"></i></span>
+                    <span class="checklist-text">Practice without proper guidance initially</span>
+                  </li>
+                  <li class="checklist-item">
+                    <span class="checklist-icon dont"><i class="fas fa-times"></i></span>
+                    <span class="checklist-text">Skip integration and grounding</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="section-divider">
+              <button class="btn-glow" id="openGrounding">
+                <i class="fas fa-spa me-2"></i> Quick Grounding Practice
+              </button>
+            </div>
+          </section>
+
+          <!-- Chakra Stages Section -->
+          <section id="stages" class="glass-card section-card">
+            <div class="section-header">
+              <div class="section-icon" style="background: linear-gradient(135deg, #a855f7, #9333ea);">
+                <i class="fas fa-layer-group text-white"></i>
+              </div>
+              <div>
+                <h2 class="section-title">Stages of Kundalini Awakening</h2>
+                <p class="section-desc">
+                  Journey through the seven energy centers. Each chakra represents a stage of consciousness
+                  with unique signs, practices, and mantras. Click any chakra to explore in depth.
+                </p>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <!-- CHAKRA 1: MULADHARA (ROOT) -->
+              <div class="col-md-6 col-lg-4">
+                <a href="components/kundalini-root-chakra/index.html" class="chakra-card" data-chakra="muladhara">
+                  <span class="chakra-badge">Stage 1</span>
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="chakra-circle chakra-root">1</div>
+                    <div>
+                      <div class="chakra-name">Muladhara</div>
+                      <div class="chakra-mantra">Mantra: LAM</div>
+                    </div>
+                  </div>
+                  <p class="chakra-desc">Root chakra — Foundation, stability, grounding. Practice: Earth connection,
+                    breath awareness.</p>
+                </a>
+              </div>
+
+              <!-- CHAKRA 2: SVADHISTHANA (SACRAL) -->
+              <div class="col-md-6 col-lg-4">
+                <a href="chakras/svadhisthana.html" class="chakra-card" data-chakra="svadhisthana">
+                  <span class="chakra-badge">Stage 2</span>
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="chakra-circle chakra-sacral">2</div>
+                    <div>
+                      <div class="chakra-name">Svadhisthana</div>
+                      <div class="chakra-mantra">Mantra: VAM</div>
+                    </div>
+                  </div>
+                  <p class="chakra-desc">Sacral chakra — Creativity, emotions, flow. Practice: Hip openers, water
+                    meditation.</p>
+                </a>
+              </div>
+
+              <!-- CHAKRA 3: MANIPURA (SOLAR PLEXUS) -->
+              <div class="col-md-6 col-lg-4">
+                <a href="chakras/manipura.html" class="chakra-card" data-chakra="manipura">
+                  <span class="chakra-badge">Stage 3</span>
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="chakra-circle chakra-solar">3</div>
+                    <div>
+                      <div class="chakra-name">Manipura</div>
+                      <div class="chakra-mantra">Mantra: RAM</div>
+                    </div>
+                  </div>
+                  <p class="chakra-desc">Solar plexus — Power, will, transformation. Practice: Core work, fire breath.
+                  </p>
+                </a>
+              </div>
+
+              <!-- CHAKRA 4: ANAHATA (HEART) -->
+              <div class="col-md-6 col-lg-4">
+                <a href="chakras/anahata.html" class="chakra-card" data-chakra="anahata">
+                  <span class="chakra-badge">Stage 4</span>
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="chakra-circle chakra-heart">4</div>
+                    <div>
+                      <div class="chakra-name">Anahata</div>
+                      <div class="chakra-mantra">Mantra: YAM</div>
+                    </div>
+                  </div>
+                  <p class="chakra-desc">Heart chakra — Love, compassion, connection. Practice: Loving-kindness, heart
+                    openers.</p>
+                </a>
+              </div>
+
+              <!-- CHAKRA 5: VISHUDDHA (THROAT) -->
+              <div class="col-md-6 col-lg-4">
+                <a href="chakras/vishuddha.html" class="chakra-card" data-chakra="vishuddha">
+                  <span class="chakra-badge">Stage 5</span>
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="chakra-circle chakra-throat">5</div>
+                    <div>
+                      <div class="chakra-name">Vishuddha</div>
+                      <div class="chakra-mantra">Mantra: HAM</div>
+                    </div>
+                  </div>
+                  <p class="chakra-desc">Throat chakra — Expression, truth, sound. Practice: Chanting, neck releases.
+                  </p>
+                </a>
+              </div>
+
+              <!-- CHAKRA 6: AJNA (THIRD EYE) -->
+              <div class="col-md-6 col-lg-4">
+                <a href="chakras/ajna.html" class="chakra-card" data-chakra="ajna">
+                  <span class="chakra-badge">Stage 6</span>
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="chakra-circle chakra-third">6</div>
+                    <div>
+                      <div class="chakra-name">Ajna</div>
+                      <div class="chakra-mantra">Mantra: OM</div>
+                    </div>
+                  </div>
+                  <p class="chakra-desc">Third eye — Intuition, insight, vision. Practice: Trataka, visualization.</p>
+                </a>
+              </div>
+
+              <!-- CHAKRA 7: SAHASRARA (CROWN) -->
+              <div class="col-12">
+                <a href="chakras/sahasrara.html" class="chakra-card" data-chakra="sahasrara"
+                  style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(139, 92, 246, 0.1));">
+                  <span class="chakra-badge">Stage 7</span>
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="chakra-circle chakra-crown">7</div>
+                    <div>
+                      <div class="chakra-name">Sahasrara</div>
+                      <div class="chakra-mantra">Mantra: Silence</div>
+                    </div>
+                  </div>
+                  <p class="chakra-desc">Crown chakra — Unity, transcendence, pure consciousness. Practice: Silent
+                    meditation, surrender.</p>
+                </a>
+              </div>
+            </div>
+
+            <div class="section-divider">
+              <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <p>Each chakra page includes detailed practices, video guidance, safety tips, and progress tracking.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Techniques Section -->
+          <section id="techniques" class="glass-card section-card">
+            <div class="section-header">
+              <div class="section-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                <i class="fas fa-dharmachakra text-white"></i>
+              </div>
+              <div>
+                <h2 class="section-title">Techniques & Practices</h2>
+                <p class="section-desc">
+                  Step-by-step guided practices with video instruction, timing, and intensity levels.
+                  Each technique includes preparation and integration guidance.
+                </p>
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="practice-card">
+                  <div class="practice-icon"
+                    style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(8, 145, 178, 0.1));">
+                    <i class="fas fa-wind" style="color: #06b6d4;"></i>
+                  </div>
+                  <h6 class="practice-title">Nadi Shodhana</h6>
+                  <div class="practice-meta">
+                    <span class="meta-item"><i class="far fa-clock"></i> 10 min</span>
+                    <span class="meta-item"><i class="fas fa-signal"></i> Beginner</span>
+                  </div>
+                  <p class="practice-desc">
+                    Alternate nostril breathing to balance the nadis and calm the mind.
+                  </p>
+                  <div class="intensity-bar">
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot"></span>
+                    <span class="intensity-dot"></span>
+                    <span class="intensity-dot"></span>
+                  </div>
+                  <button class="btn-glow w-100 start-session" data-technique="Nadi Shodhana" data-duration="10">
+                    <i class="fas fa-play me-2"></i> Start Session
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="practice-card">
+                  <div class="practice-icon"
+                    style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(167, 139, 250, 0.1));">
+                    <i class="fas fa-eye" style="color: var(--primary);"></i>
+                  </div>
+                  <h6 class="practice-title">Chakra Meditation</h6>
+                  <div class="practice-meta">
+                    <span class="meta-item"><i class="far fa-clock"></i> 20 min</span>
+                    <span class="meta-item"><i class="fas fa-signal"></i> Intermediate</span>
+                  </div>
+                  <p class="practice-desc">
+                    Guided visualization through all seven chakras with bija mantras.
+                  </p>
+                  <div class="intensity-bar">
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot"></span>
+                    <span class="intensity-dot"></span>
+                  </div>
+                  <button class="btn-glow w-100 start-session" data-technique="Chakra Meditation" data-duration="20">
+                    <i class="fas fa-play me-2"></i> Start Session
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="practice-card">
+                  <div class="practice-icon"
+                    style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.1));">
+                    <i class="fas fa-fire" style="color: #fbbf24;"></i>
+                  </div>
+                  <h6 class="practice-title">Bhastrika Pranayama</h6>
+                  <div class="practice-meta">
+                    <span class="meta-item"><i class="far fa-clock"></i> 15 min</span>
+                    <span class="meta-item"><i class="fas fa-signal"></i> Advanced</span>
+                  </div>
+                  <p class="practice-desc">
+                    Breath of fire to awaken energy and increase vitality. Requires foundation.
+                  </p>
+                  <div class="intensity-bar">
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot"></span>
+                  </div>
+                  <button class="btn-glow w-100 start-session" data-technique="Bhastrika Pranayama" data-duration="15">
+                    <i class="fas fa-play me-2"></i> Start Session
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="practice-card">
+                  <div class="practice-icon"
+                    style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(22, 163, 74, 0.1));">
+                    <i class="fas fa-spa" style="color: #22c55e;"></i>
+                  </div>
+                  <h6 class="practice-title">Yoga Nidra</h6>
+                  <div class="practice-meta">
+                    <span class="meta-item"><i class="far fa-clock"></i> 30 min</span>
+                    <span class="meta-item"><i class="fas fa-signal"></i> All Levels</span>
+                  </div>
+                  <p class="practice-desc">
+                    Yogic sleep for deep restoration and integration of practice.
+                  </p>
+                  <div class="intensity-bar">
+                    <span class="intensity-dot active"></span>
+                    <span class="intensity-dot"></span>
+                    <span class="intensity-dot"></span>
+                    <span class="intensity-dot"></span>
+                    <span class="intensity-dot"></span>
+                  </div>
+                  <button class="btn-glow w-100 start-session" data-technique="Yoga Nidra" data-duration="30">
+                    <i class="fas fa-play me-2"></i> Start Session
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Integration Section -->
+          <section id="integration" class="glass-card section-card">
+            <div class="section-header">
+              <div class="section-icon" style="background: linear-gradient(135deg, #f472b6, #ec4899);">
+                <i class="fas fa-feather-alt text-white"></i>
+              </div>
+              <div>
+                <h2 class="section-title">After-Practice Integration</h2>
+                <p class="section-desc">
+                  Journaling, grounding, and reflection practices to integrate your experiences
+                  and understand emotional releases.
+                </p>
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-lg-7">
+                <h6 style="color: var(--secondary);" class="mb-3">
+                  <i class="fas fa-pen-fancy me-2"></i>Practice Journal
+                </h6>
+                <textarea id="journal" class="journal-textarea"
+                  placeholder="Reflect on your practice... What sensations arose? What emotions surfaced? Any insights or visions? (Saved locally)"></textarea>
+                <div class="d-flex gap-2 mt-3 flex-wrap">
+                  <button class="btn-glow" id="saveJournal">
+                    <i class="fas fa-save me-2"></i> Save Entry
+                  </button>
+                  <button class="btn-ghost" id="clearJournal">
+                    <i class="fas fa-eraser me-2"></i> Clear
+                  </button>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <h6 style="color: var(--secondary);" class="mb-3">
+                  <i class="fas fa-lightbulb me-2"></i>Reflection Prompts
+                </h6>
+                <div class="prompt-card" data-prompt="What physical sensations did you notice during practice?">
+                  <i class="fas fa-hand-sparkles prompt-icon"></i>
+                  Physical sensations observed
+                </div>
+                <div class="prompt-card" data-prompt="What emotions or feelings surfaced? How did you respond?">
+                  <i class="fas fa-heart prompt-icon"></i>
+                  Emotions and responses
+                </div>
+                <div class="prompt-card" data-prompt="Were there any images, colors, or insights that emerged?">
+                  <i class="fas fa-eye prompt-icon"></i>
+                  Insights and visualizations
+                </div>
+                <div class="prompt-card" data-prompt="What are you grateful for after this practice?">
+                  <i class="fas fa-praying-hands prompt-icon"></i>
+                  Gratitude reflection
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Teacher Wisdom Section -->
+          <section id="teacher" class="glass-card section-card">
+            <div class="section-header">
+              <div class="section-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+                <i class="fas fa-book-open text-white"></i>
+              </div>
+              <div>
+                <h2 class="section-title">Teacher's Wisdom</h2>
+                <p class="section-desc">
+                  Daily insights, teachings, and contemplations from the tradition.
+                </p>
+              </div>
+            </div>
+
+            <div class="wisdom-card">
+              <i class="fas fa-quote-left wisdom-icon"></i>
+              <p class="wisdom-quote" id="wisdomQuote">
+                "Practice with steadiness and compassion. The path unfolds not through force,
+                but through patient devotion."
+              </p>
+              <p class="wisdom-author" id="wisdomAuthor">— Swami Satyananda</p>
+            </div>
+          </section>
+
+          <!-- Progress Section -->
+          <section id="progress" class="glass-card section-card">
+            <div class="section-header">
+              <div class="section-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                <i class="fas fa-chart-line text-white"></i>
+              </div>
+              <div>
+                <h2 class="section-title">Progress & Recommendations</h2>
+                <p class="section-desc">
+                  Track your journey and receive personalized suggestions based on your practice history.
+                </p>
+              </div>
+            </div>
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-4 text-center">
+                <div class="progress-ring mx-auto">
+                  <svg width="120" height="120" viewBox="0 0 120 120">
+                    <defs>
+                      <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#8b5cf6" />
+                        <stop offset="50%" style="stop-color:#a78bfa" />
+                        <stop offset="100%" style="stop-color:#f472b6" />
+                      </linearGradient>
+                    </defs>
+                    <circle class="bg" cx="60" cy="60" r="50" />
+                    <circle class="progress" id="progressCircle" cx="60" cy="60" r="50" />
+                  </svg>
+                  <div class="progress-value">
+                    <div class="progress-number" id="progressPercent">0%</div>
+                    <div class="progress-label">Complete</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="recommendation-card">
+                  <div class="recommendation-title">
+                    <i class="fas fa-sparkles"></i>
+                    Personalized Recommendation
+                  </div>
+                  <p class="recommendation-text" id="recommendation">
+                    Start with short breathing practices (5–10 min) to build your foundation.
+                    Consistency is more valuable than intensity.
+                  </p>
+                </div>
+
+                <div class="mt-3">
+                  <small style="color: var(--text-muted);">
+                    <i class="far fa-calendar-alt me-1"></i>
+                    Last practice: <strong id="lastPractice">—</strong>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Floating Action Button -->
+  <div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+      <div class="fab-item">
+        <span class="fab-item-label">Quick Grounding</span>
+        <button class="fab-item-btn" id="fabGrounding">
+          <i class="fas fa-spa"></i>
+        </button>
+      </div>
+      <div class="fab-item">
+        <span class="fab-item-label">Start Session</span>
+        <button class="fab-item-btn" id="fabSession">
+          <i class="fas fa-play"></i>
+        </button>
+      </div>
+      <div class="fab-item">
+        <span class="fab-item-label">Get Help</span>
+        <button class="fab-item-btn" id="fabHelp">
+          <i class="fas fa-question"></i>
+        </button>
+      </div>
+    </div>
+    <button class="fab" id="fabToggle">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+
+  <!-- Video Modal -->
+  <div class="modal-overlay" id="videoModal">
+    <div class="modal-content" style="max-width: 900px; padding: 0; position: relative;">
+      <button class="modal-close" id="closeVideoModal">
+        <i class="fas fa-times"></i>
+      </button>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 24px;">
+        <iframe id="videoIframe"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 24px;" src=""
+          title="Kundalini Video" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grounding Modal -->
+  <div class="modal-overlay" id="groundingModal">
+    <div class="modal-content" style="position: relative;">
+      <button class="modal-close" id="closeGrounding">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="section-icon mx-auto mb-3" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+        <i class="fas fa-spa text-white"></i>
+      </div>
+
+      <h4>Grounding Practice</h4>
+      <p style="color: var(--text-secondary);">A 3-minute exercise to reconnect with your body and the present moment.
+      </p>
+
+      <div class="timer-circle">
+        <svg width="200" height="200" viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#22c55e" />
+              <stop offset="100%" style="stop-color:#06b6d4" />
+            </linearGradient>
+          </defs>
+          <circle class="timer-bg" cx="100" cy="100" r="90" />
+          <circle class="timer-progress" id="timerProgress" cx="100" cy="100" r="90" />
+        </svg>
+        <div class="timer-value">
+          <div class="timer-time" id="timerDisplay">3:00</div>
+          <div class="timer-label" id="timerLabel">Ready</div>
+        </div>
+      </div>
+
+      <p id="groundingInstruction" style="color: var(--text-secondary); font-size: 0.95rem;">
+        Find a comfortable seat. Feel your connection to the earth.
+      </p>
+
+      <button class="btn-glow" id="startGrounding">
+        <i class="fas fa-play me-2"></i> Begin Practice
+      </button>
+    </div>
+  </div>
+
+  <!-- Session Modal -->
+  <div class="modal-overlay" id="sessionModal">
+    <div class="modal-content" style="position: relative;">
+      <button class="modal-close" id="closeSession">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="section-icon mx-auto mb-3"
+        style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+        <i class="fas fa-dharmachakra text-white"></i>
+      </div>
+
+      <h4 id="sessionTitle">Practice Session</h4>
+      <p style="color: var(--text-secondary);" id="sessionDescription">Prepare your space and settle into stillness.</p>
+
+      <div class="timer-circle">
+        <svg width="200" height="200" viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="sessionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#8b5cf6" />
+              <stop offset="100%" style="stop-color:#f472b6" />
+            </linearGradient>
+          </defs>
+          <circle class="timer-bg" cx="100" cy="100" r="90" />
+          <circle class="timer-progress" id="sessionProgress" cx="100" cy="100" r="90"
+            style="stroke: url(#sessionGradient);" />
+        </svg>
+        <div class="timer-value">
+          <div class="timer-time" id="sessionTimerDisplay">10:00</div>
+          <div class="timer-label" id="sessionTimerLabel">Ready</div>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2 justify-content-center flex-wrap">
+        <button class="btn-glow" id="startSession">
+          <i class="fas fa-play me-2"></i> Begin
+        </button>
+        <button class="btn-ghost" id="cancelSession">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ============================================
+    // KUNDALINI TANTRA - ENHANCED UI/UX
+    // ============================================
+
+    // Storage Keys
+    const STORAGE_KEYS = {
+      sessions: 'kundalini_sessions',
+      journal: 'kundalini_journal',
+      streak: 'kundalini_streak',
+      lastDate: 'kundalini_last_date',
+      theme: 'kundalini_theme'
+    };
+
+    // DOM Elements
+    const elements = {
+      // Stats
+      sessionsCount: document.getElementById('sessionsCount'),
+      streakCount: document.getElementById('streakCount'),
+      minutesCount: document.getElementById('minutesCount'),
+      lastPractice: document.getElementById('lastPractice'),
+      progressPercent: document.getElementById('progressPercent'),
+      progressCircle: document.getElementById('progressCircle'),
+      recommendation: document.getElementById('recommendation'),
+
+      // Navigation
+      navLinks: document.querySelectorAll('.nav-link[data-target]'),
+      tags: document.querySelectorAll('.tag[data-section]'),
+
+      // Journal
+      journal: document.getElementById('journal'),
+      saveJournalBtn: document.getElementById('saveJournal'),
+      clearJournalBtn: document.getElementById('clearJournal'),
+      prompts: document.querySelectorAll('.prompt-card'),
+
+      // Modals
+      groundingModal: document.getElementById('groundingModal'),
+      sessionModal: document.getElementById('sessionModal'),
+      videoModal: document.getElementById('videoModal'),
+
+      // Grounding
+      openGroundingBtn: document.getElementById('openGrounding'),
+      closeGroundingBtn: document.getElementById('closeGrounding'),
+      startGroundingBtn: document.getElementById('startGrounding'),
+      timerDisplay: document.getElementById('timerDisplay'),
+      timerLabel: document.getElementById('timerLabel'),
+      timerProgress: document.getElementById('timerProgress'),
+      groundingInstruction: document.getElementById('groundingInstruction'),
+
+      // Session
+      sessionTitle: document.getElementById('sessionTitle'),
+      sessionDescription: document.getElementById('sessionDescription'),
+      sessionTimerDisplay: document.getElementById('sessionTimerDisplay'),
+      sessionTimerLabel: document.getElementById('sessionTimerLabel'),
+      sessionProgress: document.getElementById('sessionProgress'),
+      startSessionBtn: document.getElementById('startSession'),
+      closeSessionBtn: document.getElementById('closeSession'),
+      cancelSessionBtn: document.getElementById('cancelSession'),
+      startSessionBtns: document.querySelectorAll('.start-session'),
+
+      // Video
+      closeVideoBtn: document.getElementById('closeVideoModal'),
+      videoIframe: document.getElementById('videoIframe'),
+
+      // FAB
+      fabContainer: document.getElementById('fabContainer'),
+      fabToggle: document.getElementById('fabToggle'),
+      fabGrounding: document.getElementById('fabGrounding'),
+      fabSession: document.getElementById('fabSession'),
+      fabHelp: document.getElementById('fabHelp'),
+
+      // Other
+      saveProgressBtn: document.getElementById('saveProgressBtn'),
+      guidedModeBtn: document.getElementById('guidedModeBtn'),
+      wisdomQuote: document.getElementById('wisdomQuote'),
+      wisdomAuthor: document.getElementById('wisdomAuthor'),
+      toastContainer: document.getElementById('toastContainer'),
+      themeToggle: document.getElementById('themeToggle')
+    };
+
+    // State
+    let currentSession = null;
+    let timerInterval = null;
+    let guidedMode = false;
+
+    // Wisdom Quotes
+    const wisdomQuotes = [
+      { quote: "Practice with steadiness and compassion. The path unfolds not through force, but through patient devotion.", author: "Swami Satyananda" },
+      { quote: "Observe sensations without grasping. Let awareness flow like water finding its natural course.", author: "Ancient Teaching" },
+      { quote: "Short daily practice is more transformative than occasional intensity. Consistency builds the vessel.", author: "Traditional Wisdom" },
+      { quote: "The serpent rises not by will alone, but by the grace of inner surrender.", author: "Tantric Text" },
+      { quote: "In the silence between breaths, the divine whispers its secrets.", author: "Yogic Tradition" }
+    ];
+
+    // Recommendations based on progress
+    const recommendations = [
+      { min: 0, max: 2, text: "Welcome! Start with short breathing practices (5–10 min) to build your foundation. Consistency is more valuable than intensity." },
+      { min: 3, max: 5, text: "You're building momentum! Try adding a heart-centered meditation this week. Notice how your focus deepens." },
+      { min: 6, max: 10, text: "Great progress! Consider exploring the chakra meditation series. Your foundation is becoming solid." },
+      { min: 11, max: 20, text: "You're developing a meaningful practice. Time to explore slightly more advanced techniques with proper grounding." },
+      { min: 21, max: 999, text: "Deep practitioner! Continue your journey with reverence. Consider finding a teacher for personalized guidance." }
+    ];
+
+    // Grounding instructions sequence
+    const groundingInstructions = [
+      "Close your eyes. Take a deep breath in...",
+      "Feel your sit bones connecting to the earth below...",
+      "Exhale slowly. Release any tension in your shoulders...",
+      "Notice the weight of your body. You are held.",
+      "Breathe naturally. Feel roots growing downward...",
+      "With each exhale, release what no longer serves you...",
+      "You are grounded. You are present. You are safe.",
+      "Slowly wiggle your fingers and toes...",
+      "When ready, gently open your eyes."
+    ];
+
+    // ============================================
+    // THEME TOGGLE FUNCTIONALITY
+    // ============================================
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem(STORAGE_KEYS.theme) || 'dark';
+      applyTheme(savedTheme);
+
+      elements.themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(newTheme);
+        localStorage.setItem(STORAGE_KEYS.theme, newTheme);
+        showToast('Theme Changed', `Switched to ${newTheme === 'light' ? 'Light' : 'Dark'} mode`, 'info');
+      });
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = elements.themeToggle.querySelector('i');
+      if (theme === 'light') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        elements.themeToggle.setAttribute('title', 'Switch to Dark Mode');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        elements.themeToggle.setAttribute('title', 'Switch to Light Mode');
+      }
+    }
+
+    // ============================================
+    // UTILITY FUNCTIONS
+    // ============================================
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return `${m}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function showToast(title, message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      const icons = { success: 'fa-check', info: 'fa-info', warning: 'fa-exclamation' };
+      toast.innerHTML = `
+        <div class="toast-icon"><i class="fas ${icons[type]}"></i></div>
+        <div class="toast-content">
+          <div class="toast-title">${title}</div>
+          <div class="toast-message">${message}</div>
+        </div>
+      `;
+      elements.toastContainer.appendChild(toast);
+      setTimeout(() => toast.remove(), 4000);
+    }
+
+    function generateParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 30;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 20}s`;
+        particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+        container.appendChild(particle);
+      }
+    }
+
+    // ============================================
+    // DATA MANAGEMENT
+    // ============================================
+
+    function loadState() {
+      const sessions = JSON.parse(localStorage.getItem(STORAGE_KEYS.sessions) || '[]');
+      const totalMinutes = sessions.reduce((acc, s) => acc + (s.duration || 0), 0);
+
+      elements.sessionsCount.textContent = sessions.length;
+      elements.minutesCount.textContent = totalMinutes;
+
+      if (sessions.length > 0) {
+        const lastSession = sessions[sessions.length - 1];
+        const date = new Date(lastSession.time);
+        elements.lastPractice.textContent = date.toLocaleDateString('en-US', {
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+      }
+
+      const streak = calculateStreak(sessions);
+      elements.streakCount.textContent = streak;
+
+      const progressPct = Math.min(100, sessions.length * 5);
+      elements.progressPercent.textContent = `${progressPct}%`;
+
+      const circumference = 314;
+      const offset = circumference - (progressPct / 100) * circumference;
+      elements.progressCircle.style.strokeDashoffset = offset;
+
+      const rec = recommendations.find(r => sessions.length >= r.min && sessions.length <= r.max);
+      if (rec) elements.recommendation.textContent = rec.text;
+
+      const journal = localStorage.getItem(STORAGE_KEYS.journal) || '';
+      elements.journal.value = journal;
+    }
+
+    function calculateStreak(sessions) {
+      if (sessions.length === 0) return 0;
+      let streak = 0;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const dates = [...new Set(sessions.map(s => {
+        const d = new Date(s.time);
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+      }))].sort((a, b) => b - a);
+
+      for (let i = 0; i < dates.length; i++) {
+        const expectedDate = new Date(today);
+        expectedDate.setDate(expectedDate.getDate() - i);
+        expectedDate.setHours(0, 0, 0, 0);
+
+        if (dates[i] === expectedDate.getTime()) {
+          streak++;
+        } else if (i === 0 && dates[i] === today.getTime() - 86400000) {
+          streak++;
+        } else {
+          break;
+        }
+      }
+      return streak;
+    }
+
+    function saveSession(technique, duration) {
+      const sessions = JSON.parse(localStorage.getItem(STORAGE_KEYS.sessions) || '[]');
+      sessions.push({ technique, duration, time: new Date().toISOString() });
+      localStorage.setItem(STORAGE_KEYS.sessions, JSON.stringify(sessions));
+      loadState();
+      showToast('Session Complete', `${technique} saved successfully!`, 'success');
+    }
+
+    // ============================================
+    // NAVIGATION
+    // ============================================
+
+    function initNavigation() {
+      elements.navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = e.currentTarget.getAttribute('data-target');
+          const section = document.getElementById(target);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            elements.navLinks.forEach(l => l.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+          }
+        });
+      });
+
+      elements.tags.forEach(tag => {
+        tag.addEventListener('click', (e) => {
+          const target = e.currentTarget.getAttribute('data-section');
+          const section = document.getElementById(target);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            elements.tags.forEach(t => t.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+          }
+        });
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            elements.navLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('data-target') === id);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
+    }
+
+    // ============================================
+    // CHAKRA NAVIGATION
+    // ============================================
+
+    function initChakraNavigation() {
+      const chakraCards = document.querySelectorAll('.chakra-card[data-chakra]');
+      chakraCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          const chakraName = e.currentTarget.getAttribute('data-chakra');
+          e.preventDefault();
+          showToast('Chakra Navigation', `Opening detailed ${chakraName} page...`, 'info');
+        });
+      });
+    }
+
+    // ============================================
+    // VIDEO MODAL
+    // ============================================
+
+    function initVideoModal() {
+      document.querySelectorAll('.video-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const videoUrl = card.getAttribute('data-video');
+          if (videoUrl) {
+            elements.videoIframe.src = videoUrl + '?autoplay=1';
+            elements.videoModal.classList.add('active');
+          } else {
+            showToast('Video', 'Video player would open here.', 'info');
+          }
+        });
+      });
+
+      elements.closeVideoBtn.addEventListener('click', () => {
+        elements.videoModal.classList.remove('active');
+        elements.videoIframe.src = '';
+      });
+
+      elements.videoModal.addEventListener('click', (e) => {
+        if (e.target === elements.videoModal) {
+          elements.videoModal.classList.remove('active');
+          elements.videoIframe.src = '';
+        }
+      });
+    }
+
+    // ============================================
+    // JOURNAL
+    // ============================================
+
+    function initJournal() {
+      elements.saveJournalBtn.addEventListener('click', () => {
+        const value = elements.journal.value;
+        localStorage.setItem(STORAGE_KEYS.journal, value);
+        showToast('Journal Saved', 'Your reflections have been saved locally.', 'success');
+      });
+
+      elements.clearJournalBtn.addEventListener('click', () => {
+        if (confirm('Clear your journal entry?')) {
+          elements.journal.value = '';
+          localStorage.removeItem(STORAGE_KEYS.journal);
+          showToast('Journal Cleared', 'Your journal has been cleared.', 'info');
+        }
+      });
+
+      elements.prompts.forEach(prompt => {
+        prompt.addEventListener('click', () => {
+          const text = prompt.getAttribute('data-prompt');
+          const currentValue = elements.journal.value;
+          elements.journal.value = currentValue + (currentValue ? '\n\n' : '') + '• ' + text + '\n';
+          elements.journal.focus();
+        });
+      });
+    }
+
+    // ============================================
+    // GROUNDING MODAL
+    // ============================================
+
+    function initGrounding() {
+      const openGrounding = () => {
+        elements.groundingModal.classList.add('active');
+        resetGroundingTimer();
+      };
+
+      elements.openGroundingBtn.addEventListener('click', openGrounding);
+      elements.fabGrounding.addEventListener('click', () => {
+        elements.fabContainer.classList.remove('open');
+        openGrounding();
+      });
+
+      elements.closeGroundingBtn.addEventListener('click', () => {
+        elements.groundingModal.classList.remove('active');
+        if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+      });
+
+      elements.startGroundingBtn.addEventListener('click', startGroundingTimer);
+
+      elements.groundingModal.addEventListener('click', (e) => {
+        if (e.target === elements.groundingModal) {
+          elements.groundingModal.classList.remove('active');
+          if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+        }
+      });
+    }
+
+    function resetGroundingTimer() {
+      elements.timerDisplay.textContent = '3:00';
+      elements.timerLabel.textContent = 'Ready';
+      elements.timerProgress.style.strokeDashoffset = 0;
+      elements.groundingInstruction.textContent = 'Find a comfortable seat. Feel your connection to the earth.';
+      elements.startGroundingBtn.innerHTML = '<i class="fas fa-play me-2"></i> Begin Practice';
+      elements.startGroundingBtn.disabled = false;
+    }
+
+    function startGroundingTimer() {
+      let seconds = 180;
+      const totalSeconds = 180;
+      const circumference = 565;
+      let instructionIndex = 0;
+
+      elements.startGroundingBtn.disabled = true;
+      elements.startGroundingBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> In Progress';
+
+      timerInterval = setInterval(() => {
+        seconds--;
+        elements.timerDisplay.textContent = formatTime(seconds);
+        elements.timerLabel.textContent = 'Breathe...';
+
+        const progress = (totalSeconds - seconds) / totalSeconds;
+        elements.timerProgress.style.strokeDashoffset = circumference * (1 - progress);
+
+        const instructionInterval = Math.floor(totalSeconds / groundingInstructions.length);
+        const newIndex = Math.floor((totalSeconds - seconds) / instructionInterval);
+        if (newIndex !== instructionIndex && newIndex < groundingInstructions.length) {
+          instructionIndex = newIndex;
+          elements.groundingInstruction.style.opacity = '0';
+          setTimeout(() => {
+            elements.groundingInstruction.textContent = groundingInstructions[instructionIndex];
+            elements.groundingInstruction.style.opacity = '1';
+          }, 300);
+        }
+
+        if (seconds <= 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          elements.timerLabel.textContent = 'Complete';
+          elements.groundingInstruction.textContent = 'You are grounded. Carry this presence with you.';
+          elements.startGroundingBtn.innerHTML = '<i class="fas fa-check me-2"></i> Done';
+          showToast('Grounding Complete', 'Take a moment before continuing.', 'success');
+        }
+      }, 1000);
+    }
+
+    // ============================================
+    // SESSION MODAL
+    // ============================================
+
+    function initSession() {
+      elements.startSessionBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const technique = e.currentTarget.getAttribute('data-technique');
+          const duration = parseInt(e.currentTarget.getAttribute('data-duration')) || 10;
+          openSessionModal(technique, duration);
+        });
+      });
+
+      elements.fabSession.addEventListener('click', () => {
+        elements.fabContainer.classList.remove('open');
+        openSessionModal('Quick Practice', 10);
+      });
+
+      elements.closeSessionBtn.addEventListener('click', closeSessionModal);
+      elements.cancelSessionBtn.addEventListener('click', closeSessionModal);
+      elements.startSessionBtn.addEventListener('click', startSessionTimer);
+
+      elements.sessionModal.addEventListener('click', (e) => {
+        if (e.target === elements.sessionModal) closeSessionModal();
+      });
+    }
+
+    function openSessionModal(technique, duration) {
+      currentSession = { technique, duration };
+      elements.sessionTitle.textContent = technique;
+      elements.sessionDescription.textContent = `Prepare for a ${duration}-minute ${technique} session.`;
+      elements.sessionTimerDisplay.textContent = `${duration}:00`;
+      elements.sessionTimerLabel.textContent = 'Ready';
+      elements.sessionProgress.style.strokeDashoffset = 0;
+      elements.startSessionBtn.innerHTML = '<i class="fas fa-play me-2"></i> Begin';
+      elements.startSessionBtn.disabled = false;
+      elements.sessionModal.classList.add('active');
+    }
+
+    function closeSessionModal() {
+      elements.sessionModal.classList.remove('active');
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+      currentSession = null;
+    }
+
+    function startSessionTimer() {
+      if (!currentSession) return;
+
+      let seconds = currentSession.duration * 60;
+      const totalSeconds = seconds;
+      const circumference = 565;
+
+      elements.startSessionBtn.disabled = true;
+      elements.startSessionBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> In Progress';
+      elements.cancelSessionBtn.textContent = 'End Early';
+
+      timerInterval = setInterval(() => {
+        seconds--;
+        elements.sessionTimerDisplay.textContent = formatTime(seconds);
+        elements.sessionTimerLabel.textContent = 'Focus...';
+
+        const progress = (totalSeconds - seconds) / totalSeconds;
+        elements.sessionProgress.style.strokeDashoffset = circumference * (1 - progress);
+
+        if (seconds <= 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          elements.sessionTimerLabel.textContent = 'Complete';
+          elements.startSessionBtn.innerHTML = '<i class="fas fa-check me-2"></i> Finished';
+          saveSession(currentSession.technique, currentSession.duration);
+          setTimeout(() => closeSessionModal(), 2000);
+        }
+      }, 1000);
+    }
+
+    // ============================================
+    // FAB MENU
+    // ============================================
+
+    function initFAB() {
+      elements.fabToggle.addEventListener('click', () => {
+        elements.fabContainer.classList.toggle('open');
+      });
+
+      elements.fabHelp.addEventListener('click', () => {
+        elements.fabContainer.classList.remove('open');
+        showToast('Quick Tip', 'Start with 5–10 minutes of breathwork. Move slowly and journal what you feel.', 'info');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!elements.fabContainer.contains(e.target)) {
+          elements.fabContainer.classList.remove('open');
+        }
+      });
+    }
+
+    // ============================================
+    // WISDOM ROTATION
+    // ============================================
+
+    function initWisdom() {
+      let currentIndex = 0;
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % wisdomQuotes.length;
+        const wisdom = wisdomQuotes[currentIndex];
+
+        elements.wisdomQuote.style.opacity = '0';
+        elements.wisdomAuthor.style.opacity = '0';
+
+        setTimeout(() => {
+          elements.wisdomQuote.textContent = `"${wisdom.quote}"`;
+          elements.wisdomAuthor.textContent = `— ${wisdom.author}`;
+          elements.wisdomQuote.style.opacity = '1';
+          elements.wisdomAuthor.style.opacity = '1';
+        }, 500);
+      }, 10000);
+    }
+
+    // ============================================
+    // OTHER FEATURES
+    // ============================================
+
+    function initOther() {
+      elements.saveProgressBtn.addEventListener('click', () => {
+        showToast('Progress Saved', 'Your progress is stored locally in your browser.', 'success');
+      });
+
+      elements.guidedModeBtn.addEventListener('click', () => {
+        guidedMode = !guidedMode;
+        elements.guidedModeBtn.innerHTML = guidedMode
+          ? '<i class="fas fa-check me-2"></i> Guided: ON'
+          : '<i class="fas fa-magic me-2"></i> Guided Mode';
+        if (guidedMode) {
+          showToast('Guided Mode Active', 'We\'ll suggest practices based on your progress.', 'info');
+        }
+      });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+      generateParticles();
+      initTheme();
+      loadState();
+      initNavigation();
+      initChakraNavigation();
+      initVideoModal();
+      initJournal();
+      initGrounding();
+      initSession();
+      initFAB();
+      initWisdom();
+      initOther();
+      console.log('✨ Kundalini Tantra App Initialized Successfully');
+    });
+  </script>
+</body>
+
+</html>

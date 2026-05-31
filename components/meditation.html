@@ -1,0 +1,1314 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kundalini Meditation Practice App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-purple: #6f42c1;
+      --light-purple: #8B5CF6;
+      --lighter-purple: #A78BFA;
+      --bg-light-purple: #F5F3FF;
+      --bg-lighter-purple: #EDE9FE;
+      --text-muted: #6c757d;
+      --night-bg: #181825;
+      --night-card: #26223c;
+      --night-text: #eee;
+      --night-table: #282040;
+      --night-muted: #889;
+    }
+
+    * {
+      transition: all 0.3s ease;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffffff 0%, var(--bg-lighter-purple) 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    html.night-mode body {
+      background: linear-gradient(135deg, var(--night-bg) 0%, #1f1b2e 100%);
+      color: var(--night-text);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background: white !important;
+      box-shadow: 0 2px 8px rgba(111, 66, 193, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    html.night-mode .navbar {
+      background: var(--night-card) !important;
+      box-shadow: 0 2px 12px rgba(111, 66, 193, 0.15);
+    }
+
+    .navbar-brand {
+      color: var(--primary-purple) !important;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      color: var(--light-purple) !important;
+      transform: scale(1.05);
+    }
+
+    html.night-mode .navbar-brand {
+      color: var(--light-purple) !important;
+    }
+
+    .nav-link {
+      color: var(--text-muted) !important;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 0.5rem !important;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--primary-purple);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-purple) !important;
+      transform: translateY(-2px);
+    }
+
+    html.night-mode .nav-link {
+      color: var(--night-muted) !important;
+    }
+
+    html.night-mode .nav-link:hover {
+      color: var(--light-purple) !important;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-purple) 0%, var(--light-purple) 100%);
+      padding: 3rem 2.5rem;
+      border-radius: 16px;
+      color: white;
+      box-shadow: 0 12px 30px rgba(111, 66, 193, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .hero:hover {
+      box-shadow: 0 16px 40px rgba(111, 66, 193, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .hero h1 {
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .small-muted {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: white;
+      color: var(--primary-purple);
+      border: none;
+      font-weight: 600;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-primary:hover {
+      background: var(--bg-light-purple);
+      color: var(--primary-purple);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(111, 66, 193, 0.3);
+    }
+
+    .btn-outline-primary {
+      color: var(--primary-purple);
+      border: 2px solid var(--primary-purple);
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-outline-primary:hover {
+      background: var(--primary-purple);
+      color: white;
+      border-color: var(--primary-purple);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(111, 66, 193, 0.3);
+    }
+
+    .btn-outline-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(220, 53, 69, 0.3);
+    }
+
+    .btn-outline-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+    }
+
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-warning:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+    }
+
+    .tag {
+      background: rgba(111, 66, 193, 0.15);
+      color: var(--primary-purple);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-block;
+      border: 1px solid rgba(111, 66, 193, 0.3);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .tag:hover {
+      background: var(--primary-purple);
+      color: white;
+      border-color: var(--primary-purple);
+      transform: scale(1.08);
+    }
+
+    html.night-mode .tag {
+      background: rgba(139, 92, 246, 0.2);
+      border-color: var(--light-purple);
+    }
+
+    html.night-mode .tag:hover {
+      background: var(--light-purple);
+      color: var(--night-bg);
+    }
+
+    /* Input & Filter Styling */
+    .input-group {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(111, 66, 193, 0.08);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .input-group:focus-within {
+      border-color: var(--primary-purple);
+      box-shadow: 0 6px 20px rgba(111, 66, 193, 0.15);
+      transform: translateY(-2px);
+    }
+
+    html.night-mode .input-group {
+      background: var(--night-table);
+      color: var(--night-text);
+      box-shadow: 0 4px 12px rgba(111, 66, 193, 0.1);
+    }
+
+    .form-control,
+    .form-select {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      box-shadow: none;
+      border-color: transparent;
+      color: var(--primary-purple);
+    }
+
+    html.night-mode .form-control,
+    html.night-mode .form-select {
+      color: var(--night-text);
+      background: transparent;
+    }
+
+    .input-group-text {
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+    }
+
+    /* Tech Card Styling */
+    .tech-card {
+      border: 2px solid transparent;
+      border-radius: 12px;
+      background: white;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(111, 66, 193, 0.08);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      border-color: var(--primary-purple);
+      box-shadow: 0 16px 40px rgba(111, 66, 193, 0.2);
+    }
+
+    .tech-card:hover .video-preview {
+      transform: scale(1.08) brightness(1.1);
+      filter: brightness(1.1);
+    }
+
+    html.night-mode .tech-card {
+      background: var(--night-card);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    .video-preview {
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0;
+      transition: all 0.4s ease;
+      background: linear-gradient(135deg, var(--bg-light-purple), var(--bg-lighter-purple));
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      color: var(--primary-purple);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+
+    .tech-card:hover .card-title {
+      color: var(--light-purple);
+    }
+
+    html.night-mode .card-title {
+      color: var(--light-purple);
+    }
+
+    .card-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    html.night-mode .card-text {
+      color: var(--night-muted);
+    }
+
+    .small-muted {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    html.night-mode .small-muted {
+      color: var(--night-muted);
+    }
+
+    /* Card Styling */
+    .card {
+      border: 2px solid transparent;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(111, 66, 193, 0.08);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: white;
+    }
+
+    .card:not(.tech-card):hover {
+      border-color: var(--primary-purple);
+      box-shadow: 0 8px 24px rgba(111, 66, 193, 0.15);
+      transform: translateY(-4px);
+    }
+
+    html.night-mode .card {
+      background: var(--night-card);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    .card.bg-light {
+      background: var(--bg-lighter-purple) !important;
+    }
+
+    html.night-mode .card.bg-light {
+      background: var(--night-table) !important;
+    }
+
+    .card p:first-child {
+      color: var(--primary-purple);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card .h2 {
+      color: var(--primary-purple);
+      font-weight: 700;
+    }
+
+    html.night-mode .card .h2 {
+      color: var(--light-purple);
+    }
+
+    .card .h6 {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Section Headers */
+    section h4 {
+      color: var(--primary-purple);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+
+    section h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--light-purple));
+      border-radius: 2px;
+    }
+
+    html.night-mode section h4 {
+      color: var(--light-purple);
+    }
+
+    /* Table Styling */
+    .table {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(111, 66, 193, 0.08);
+      transition: all 0.3s;
+    }
+
+    .table:hover {
+      box-shadow: 0 8px 24px rgba(111, 66, 193, 0.15);
+    }
+
+    .table thead {
+      background: linear-gradient(90deg, var(--primary-purple), var(--light-purple));
+      color: white;
+    }
+
+    .table thead th {
+      border: none;
+      font-weight: 600;
+      padding: 1rem;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    .table tbody tr {
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--bg-lighter-purple);
+    }
+
+    .table tbody tr:hover {
+      background: var(--bg-lighter-purple);
+      transform: scale(1.01);
+    }
+
+    .table td {
+      padding: 1rem;
+      color: var(--text-muted);
+      vertical-align: middle;
+      transition: all 0.2s;
+    }
+
+    html.night-mode .table {
+      background: var(--night-table);
+      color: var(--night-text);
+    }
+
+    html.night-mode .table thead {
+      background: linear-gradient(90deg, var(--primary-purple), var(--light-purple));
+    }
+
+    html.night-mode .table tbody tr {
+      border-bottom-color: var(--primary-purple);
+    }
+
+    html.night-mode .table tbody tr:hover {
+      background: rgba(111, 66, 193, 0.2);
+    }
+
+    html.night-mode .table td {
+      color: var(--night-text);
+    }
+
+    /* Modal Styling */
+    .modal-content {
+      border: 2px solid var(--bg-lighter-purple);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(111, 66, 193, 0.2);
+      transition: all 0.3s;
+      background: white;
+    }
+
+    html.night-mode .modal-content {
+      background: var(--night-card);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    .modal-header {
+      background: linear-gradient(90deg, var(--primary-purple), var(--light-purple));
+      color: white;
+      border: none;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .modal-title {
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .btn-close {
+      filter: brightness(0) invert(1);
+      transition: all 0.3s;
+    }
+
+    .btn-close:hover {
+      filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+    }
+
+    .modal-body {
+      padding: 2rem;
+      background: white;
+    }
+
+    html.night-mode .modal-body {
+      background: var(--night-card);
+    }
+
+    .form-label {
+      color: var(--primary-purple);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      transition: all 0.3s;
+    }
+
+    html.night-mode .form-label {
+      color: var(--light-purple);
+    }
+
+    .form-control,
+    .form-select {
+      border: 2px solid var(--bg-lighter-purple);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--primary-purple);
+      box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.1);
+      transform: scale(1.02);
+    }
+
+    html.night-mode .form-control,
+    html.night-mode .form-select {
+      background: var(--night-table);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    /* Progress Bar */
+    .progress {
+      background: var(--bg-lighter-purple);
+      border-radius: 10px;
+      overflow: hidden;
+      height: 14px;
+      box-shadow: 0 4px 12px rgba(111, 66, 193, 0.08);
+      transition: all 0.3s;
+    }
+
+    html.night-mode .progress {
+      background: var(--night-table);
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, var(--primary-purple), var(--light-purple));
+      border-radius: 10px;
+      transition: width 0.5s ease;
+      box-shadow: 0 2px 8px rgba(111, 66, 193, 0.2);
+    }
+
+    /* Timer Display */
+    #timerDisplay {
+      color: var(--primary-purple);
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 2px;
+      font-size: 2.5rem;
+      transition: all 0.3s;
+    }
+
+    html.night-mode #timerDisplay {
+      color: var(--light-purple);
+      text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 2rem 0;
+      border-top: 2px solid var(--bg-lighter-purple);
+      margin-top: 3rem;
+      transition: all 0.3s;
+    }
+
+    html.night-mode footer {
+      color: var(--night-muted);
+      border-top-color: var(--primary-purple);
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2000;
+      background: linear-gradient(135deg, var(--primary-purple), var(--light-purple));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      box-shadow: 0 6px 24px rgba(111, 66, 193, 0.3);
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .toggle-btn:hover {
+      background: linear-gradient(135deg, var(--light-purple), var(--primary-purple));
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 10px 32px rgba(111, 66, 193, 0.4);
+    }
+
+    .toggle-btn:active {
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 2rem 1.5rem;
+        text-align: center;
+      }
+
+      .video-preview {
+        height: 160px;
+      }
+
+      section h4 {
+        font-size: 1.1rem;
+      }
+
+      .modal-dialog {
+        margin: 1rem;
+      }
+
+      .toggle-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tech-card {
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .tech-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .tech-card:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .tech-card:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .tech-card:nth-child(4) {
+      animation-delay: 0.25s;
+    }
+
+    .tech-card:nth-child(5) {
+      animation-delay: 0.3s;
+    }
+
+    .tech-card:nth-child(6) {
+      animation-delay: 0.35s;
+    }
+
+    .tech-card:nth-child(7) {
+      animation-delay: 0.4s;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+      <a class="navbar-brand" href="#">🧘 Kundalini Practice</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="#techniques">Techniques</a></li>
+          <li class="nav-item"><a class="nav-link" href="#history">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="#stats">Progress</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <div class="hero d-flex align-items-center gap-4">
+      <div>
+        <h1>Kundalini Meditation Practice App</h1>
+        <p class="small-muted mb-3">Guided sessions, videos, progress tracking and post-practice feedback — all in one
+          responsive app.</p>
+        <div class="d-flex gap-2 flex-wrap">
+          <a class="btn btn-primary" href="#techniques">Start a Session</a>
+          <button id="btnQuickStart" class="btn btn-outline-primary">Quick Start 10m</button>
+        </div>
+      </div>
+      <div class="text-center d-none d-md-block">
+        <div class="tag mb-2">Beginner → Advanced</div>
+        <div class="small-muted mt-2" style="max-width: 200px;">Practice safely. If new to Kundalini, start with short
+          sessions.</div>
+      </div>
+    </div>
+
+    <!-- Filters + Search -->
+    <div class="row my-5">
+      <div class="col-lg-8">
+        <div class="input-group">
+          <span class="input-group-text">🔎</span>
+          <input id="searchInput" type="text" class="form-control" placeholder="Search technique, chakra or purpose">
+          <select id="filterLevel" class="form-select" style="max-width:160px">
+            <option value="all">All Levels</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+          <button id="btnResetFilters" class="btn btn-outline-primary">Reset</button>
+        </div>
+      </div>
+      <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+        <small class="small-muted">Total techniques: <strong style="color: var(--primary-purple)"><span
+              id="techCount">0</span></strong></small>
+      </div>
+    </div>
+
+    <!-- Techniques Grid -->
+    <section id="techniques" class="mb-5">
+      <div class="row" id="techGrid"></div>
+    </section>
+
+    <!-- History & Stats -->
+    <section id="history" class="my-5">
+      <h4>Practice History</h4>
+      <div class="table-responsive">
+        <table class="table table-striped" id="historyTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Technique</th>
+              <th>Duration</th>
+              <th>Rating</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="mt-3 d-flex gap-3 flex-wrap">
+        <button id="btnClearHistory" class="btn btn-outline-danger btn-sm">Clear History</button>
+        <div class="small-muted align-self-center">(Stored locally in your browser)</div>
+      </div>
+    </section>
+
+    <section id="stats" class="my-5">
+      <h4>Progress Summary</h4>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card bg-light p-4">
+            <div class="fw-bold">Total Sessions</div>
+            <div class="h2" id="statSessions">0</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card bg-light p-4">
+            <div class="fw-bold">Total Minutes</div>
+            <div class="h2" id="statMinutes">0</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card bg-light p-4">
+            <div class="fw-bold">Most Practiced</div>
+            <div class="h6" id="statTop">—</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="my-5">
+      <h4>About This App</h4>
+      <p class="small-muted">Each technique card contains a guided knowledge base, recommended posture, duration and a
+        video example from YouTube. The session modal guides you step-by-step with a timer, and asks for feedback at the
+        end so you get personalised progress insight. All data is stored locally for privacy.</p>
+    </section>
+  </div>
+
+  <!-- Session Modal -->
+  <div class="modal fade" id="sessionModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="sessionTitle" class="modal-title">Start Session</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div id="sessionGuidance" class="mb-3 small-muted">Guidance will appear here.</div>
+              <ul class="small-muted" style="line-height: 1.8;">
+                <li id="sessionPosture">Posture: —</li>
+                <li id="sessionDuration">Recommended: —</li>
+                <li id="sessionCautions">Cautions: —</li>
+              </ul>
+              <div class="mt-3">
+                <a id="sessionVideoLink" href="#" target="_blank" class="btn btn-outline-secondary btn-sm">📹 Open Video
+                  Example</a>
+              </div>
+            </div>
+            <div class="col-md-6 text-center">
+              <div class="mb-3"><strong style="color: var(--primary-purple);">Session Timer</strong></div>
+              <div id="timerDisplay">00:00</div>
+              <div class="progress mt-4" style="height: 14px;">
+                <div id="sessionProgress" class="progress-bar" role="progressbar" style="width:0%"></div>
+              </div>
+              <div class="mt-4 d-flex justify-content-center gap-2">
+                <button id="btnStart" class="btn btn-success btn-sm">Start</button>
+                <button id="btnPause" class="btn btn-warning btn-sm" disabled>Pause</button>
+                <button id="btnStop" class="btn btn-danger btn-sm" disabled>End</button>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="small-muted"><strong>Quick Tips:</strong> Breathe comfortably, keep a straight spine and proceed
+            gently. If you experience dizziness or emotional overwhelm, stop and rest.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div class="modal fade" id="feedbackModal" tabindex="-1">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Session Feedback</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="feedbackForm">
+            <div class="mb-3">
+              <label class="form-label">How was your session?</label>
+              <select id="rating" class="form-select">
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Good</option>
+                <option value="3">3 - Neutral</option>
+                <option value="2">2 - Difficult</option>
+                <option value="1">1 - Uncomfortable</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Notes (how you felt, sensations)</label>
+              <textarea id="notes" rows="3" class="form-control" placeholder="Short notes..."></textarea>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-primary" type="submit">Save Feedback</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Technique Dataset
+    const techniques = [
+      {
+        id: 'nadi',
+        title: 'Nadi Shodhana (Alternate Nostril)',
+        level: 'Beginner',
+        chakra: 'Ida & Pingala',
+        duration: 8,
+        posture: 'Comfortable cross-legged',
+        purpose: 'Balance left & right energies, purify nadis',
+        benefits: 'Calmness, clarity, balanced energy',
+        video: 'https://youtu.be/l11qFpRqhIQ?si=KYZvJ-ScbkxFpMR5',
+        videoId: 'l11qFpRqhIQ',
+        caution: 'Avoid when congested or dizzy',
+        guidance: 'Sit with spine straight. Use right thumb and ring finger to alternate nostrils. Gentle, even breath.'
+      },
+      {
+        id: 'kapal',
+        title: 'Kapalabhati (Skull Shining Breath)',
+        level: 'Beginner',
+        chakra: 'Muladhara & Manipura',
+        duration: 4,
+        posture: 'Seated upright',
+        purpose: 'Energize body, cleanse',
+        benefits: 'Alertness, detox, vitality',
+        video: 'https://youtu.be/52TOhE94fEg?si=eR8QVN8O21j3xE8d',
+        videoId: '52TOhE94fEg',
+        caution: 'Avoid with high blood pressure or pregnancy',
+        guidance: 'Short active exhalations and passive inhalations. Start slowly.'
+      },
+      {
+        id: 'kundalini yoga',
+        title: 'kundalini yoga',
+        level: 'Beginner',
+        chakra: 'Entire spine & chakras',
+        duration: 5,
+        posture: '7 diff position',
+        purpose: 'Rapid prana activation',
+        benefits: 'Energy surge, alert mind',
+        video: 'https://youtu.be/24RYHE3HlCQ?si=FL5D7Ri-qVoS_axn',
+        videoId: '24RYHE3HlCQ',
+        caution: 'Avoid if anxious or hypertensive',
+        guidance: 'Powerful inhalation & exhalation cycles. Keep focus on belly.'
+      },
+      {
+        id: 'bija',
+        title: 'Bija Mantras (Chakra Seed Sounds)',
+        level: 'Beginner',
+        chakra: 'Individual chakras',
+        duration: 15,
+        posture: 'Any meditative posture',
+        purpose: 'Activate chakras',
+        benefits: 'Vibrational alignment, awareness',
+        video: 'https://youtu.be/NmAHY_tg9Es?si=RI6_Buw6kxV92xjo',
+        videoId: 'NmAHY_tg9Es',
+        caution: 'Maintain steady breathing',
+        guidance: 'Chant each bija (Lam, Vam, Ram...) with focused attention on corresponding chakra.'
+      },
+      {
+        id: 'visual',
+        title: 'Chakra Visualization (Lotus / Light)',
+        level: 'Intermediate',
+        chakra: 'Root → Crown',
+        duration: 20,
+        posture: 'Seated spine straight',
+        purpose: 'Guide Kundalini through chakras',
+        benefits: 'Enhanced focus, inner vision',
+        video: 'https://youtube.com/shorts/qGrIjou4ZcI?si=wyvLEWeIAebfJtHu',
+        videoId: 'qGrIjou4ZcI',
+        caution: 'Avoid over-focus; stay grounded',
+        guidance: 'Visualize each chakra as a spinning lotus of light rising through the spine.'
+      },
+      {
+        id: 'mudra',
+        title: 'Mudra & Bandha Practice',
+        level: 'Intermediate',
+        chakra: 'Root / Solar Plexus / Throat',
+        duration: 10,
+        posture: 'Seated',
+        purpose: 'Contain & direct prana',
+        benefits: 'Stability, safe awakening',
+        video: 'https://www.youtube.com/live/BvR0nlvQaHA?si=3uenZJH1E1pRFR9h',
+        videoId: 'BvR0nlvQaHA',
+        caution: 'Learn from a teacher for complex bandhas',
+        guidance: 'Practice mula bandha gently. Use hand mudras to direct attention.'
+      },
+      {
+        id: 'shakti',
+        title: 'Shakti Visualization (Divine Feminine)',
+        level: 'Advanced',
+        chakra: 'Root → Crown',
+        duration: 25,
+        posture: 'Meditative posture',
+        purpose: 'Awaken Shakti',
+        benefits: 'Empowerment, healing',
+        video: 'https://youtu.be/BciH9pV8UrQ?si=bztxm_8WERcEz8uG',
+        videoId: 'BciH9pV8UrQ',
+        caution: 'May bring emotional release; have support',
+        guidance: 'Invoke warm, nurturing energy and guide it up the spine.'
+      }
+    ];
+
+    // UI Elements
+    const techGrid = document.getElementById('techGrid');
+    const techCount = document.getElementById('techCount');
+    const searchInput = document.getElementById('searchInput');
+    const filterLevel = document.getElementById('filterLevel');
+    const btnReset = document.getElementById('btnResetFilters');
+
+    function renderTech(list) {
+      techGrid.innerHTML = '';
+      list.forEach(t => {
+        const col = document.createElement('div');
+        col.className = 'col-md-4 mb-4';
+        col.innerHTML = `
+          <div class="card tech-card h-100">
+            <img src="https://img.youtube.com/vi/${t.videoId}/hqdefault.jpg" class="card-img-top video-preview" alt="${t.title}">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">${t.title}</h5>
+              <p class="small-muted mb-1"><strong>Focus:</strong> ${t.chakra}</p>
+              <p class="mb-2"><span class="tag">${t.level}</span></p>
+              <p class="card-text mb-3">${t.purpose}</p>
+              <div class="mt-auto d-flex justify-content-between align-items-center gap-2 flex-wrap">
+                <a href="${t.video}" target="_blank" class="btn btn-outline-secondary btn-sm">Video</a>
+                <button class="btn btn-primary btn-sm" onclick='openSession("${t.id}")'>Start</button>
+              </div>
+            </div>
+          </div>
+        `;
+        techGrid.appendChild(col);
+      });
+      techCount.textContent = list.length;
+    }
+
+    renderTech(techniques);
+
+    // Filter Functions
+    function applyFilters() {
+      const q = searchInput.value.trim().toLowerCase();
+      const level = filterLevel.value;
+      const filtered = techniques.filter(t => {
+        const text = (t.title + ' ' + t.chakra + ' ' + t.purpose + ' ' + t.benefits).toLowerCase();
+        const levelMatch = level === 'all' ? true : t.level === level;
+        return levelMatch && (!q || text.includes(q));
+      });
+      renderTech(filtered);
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    filterLevel.addEventListener('change', applyFilters);
+    btnReset.addEventListener('click', () => {
+      searchInput.value = '';
+      filterLevel.value = 'all';
+      applyFilters();
+    });
+
+    // Session Management
+    let currentSession = null;
+    let timerInterval = null;
+    let elapsed = 0;
+
+    const sessionModalEl = document.getElementById('sessionModal');
+    const sessionModal = new bootstrap.Modal(sessionModalEl);
+    const sessionTitle = document.getElementById('sessionTitle');
+    const sessionGuidance = document.getElementById('sessionGuidance');
+    const sessionPosture = document.getElementById('sessionPosture');
+    const sessionDuration = document.getElementById('sessionDuration');
+    const sessionCautions = document.getElementById('sessionCautions');
+    const sessionVideoLink = document.getElementById('sessionVideoLink');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const sessionProgress = document.getElementById('sessionProgress');
+    const btnStart = document.getElementById('btnStart');
+    const btnPause = document.getElementById('btnPause');
+    const btnStop = document.getElementById('btnStop');
+
+    function openSession(id) {
+      const tech = techniques.find(t => t.id === id);
+      if (!tech) return;
+      currentSession = {
+        id: tech.id,
+        title: tech.title,
+        recommended: tech.duration,
+        startTime: null,
+        elapsed: 0
+      };
+      sessionTitle.textContent = tech.title;
+      sessionGuidance.textContent = tech.guidance;
+      sessionPosture.textContent = 'Posture: ' + tech.posture;
+      sessionDuration.textContent = 'Recommended: ' + tech.duration + ' min';
+      sessionCautions.textContent = 'Cautions: ' + tech.caution;
+      sessionVideoLink.href = tech.video;
+      timerDisplay.textContent = formatTime(0);
+      sessionProgress.style.width = '0%';
+      btnStart.disabled = false;
+      btnPause.disabled = true;
+      btnStop.disabled = true;
+      elapsed = 0;
+      sessionModal.show();
+    }
+
+    btnStart.addEventListener('click', () => {
+      if (!currentSession) return;
+      if (!currentSession.startTime) {
+        currentSession.startTime = Date.now();
+        elapsed = 0;
+      }
+      startTimer();
+    });
+
+    btnPause.addEventListener('click', () => {
+      pauseTimer();
+    });
+
+    btnStop.addEventListener('click', () => {
+      endSession();
+    });
+
+    function startTimer() {
+      btnStart.disabled = true;
+      btnPause.disabled = false;
+      btnStop.disabled = false;
+      if (timerInterval) return;
+      timerInterval = setInterval(() => {
+        elapsed++;
+        timerDisplay.textContent = formatTime(elapsed);
+        const percent = Math.min(100, Math.round((elapsed / (currentSession.recommended * 60)) * 100));
+        sessionProgress.style.width = percent + '%';
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      btnStart.disabled = false;
+      btnPause.disabled = true;
+    }
+
+    function endSession() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      currentSession.elapsed = elapsed;
+      currentSession.endTime = Date.now();
+      bootstrap.Modal.getInstance(sessionModalEl).hide();
+      const fb = new bootstrap.Modal(document.getElementById('feedbackModal'));
+      fb.show();
+    }
+
+    // Feedback Handling
+    const feedbackForm = document.getElementById('feedbackForm');
+    feedbackForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const rating = +document.getElementById('rating').value;
+      const notes = document.getElementById('notes').value.trim();
+      const record = {
+        id: currentSession.id,
+        title: currentSession.title,
+        durationSec: currentSession.elapsed || 0,
+        durationMin: Math.round((currentSession.elapsed || 0) / 60 * 10) / 10,
+        rating,
+        notes,
+        date: new Date().toISOString()
+      };
+      saveRecord(record);
+      document.getElementById('notes').value = '';
+      feedbackForm.reset();
+      bootstrap.Modal.getInstance(document.getElementById('feedbackModal')).hide();
+      currentSession = null;
+      elapsed = 0;
+      updateHistoryUI();
+      updateStats();
+      alert('Session saved — thank you for your feedback!');
+    });
+
+    // Local Storage
+    function getHistory() {
+      try {
+        const raw = localStorage.getItem('kundalini_history');
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveHistory(arr) {
+      localStorage.setItem('kundalini_history', JSON.stringify(arr));
+    }
+
+    function saveRecord(rec) {
+      const h = getHistory();
+      h.unshift(rec);
+      saveHistory(h);
+    }
+
+    function updateHistoryUI() {
+      const tbody = document.querySelector('#historyTable tbody');
+      tbody.innerHTML = '';
+      const h = getHistory();
+      if (h.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="small-muted text-center py-3">No sessions yet. Start a practice to populate history.</td></tr>';
+        return;
+      }
+      h.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${new Date(r.date).toLocaleString()}</td>
+          <td>${r.title}</td>
+          <td>${r.durationMin} min</td>
+          <td>${'⭐'.repeat(r.rating)}</td>
+          <td>${escapeHtml(r.notes || '')}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateStats() {
+      const h = getHistory();
+      document.getElementById('statSessions').textContent = h.length;
+      const totalMin = h.reduce((s, r) => s + (r.durationSec || 0) / 60, 0);
+      document.getElementById('statMinutes').textContent = Math.round(totalMin * 10) / 10;
+      const counts = {};
+      h.forEach(r => counts[r.title] = (counts[r.title] || 0) + 1);
+      const top = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0] || '—';
+      document.getElementById('statTop').textContent = top;
+    }
+
+    // Initialize
+    updateHistoryUI();
+    updateStats();
+
+    // Quick Start
+    document.getElementById('btnQuickStart').addEventListener('click', () => {
+      openSession(techniques[0].id);
+      currentSession.recommended = 10;
+      document.getElementById('sessionDuration').textContent = 'Recommended: 10 min';
+    });
+
+    // Clear History
+    document.getElementById('btnClearHistory').addEventListener('click', () => {
+      if (confirm('Clear all practice history? This cannot be undone.')) {
+        localStorage.removeItem('kundalini_history');
+        updateHistoryUI();
+        updateStats();
+      }
+    });
+
+    // Utilities
+    function formatTime(s) {
+      const mm = String(Math.floor(s / 60)).padStart(2, '0');
+      const ss = String(s % 60).padStart(2, '0');
+      return `${mm}:${ss}`;
+    }
+
+    function escapeHtml(txt) {
+      return txt.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+    }
+
+    window.openSession = openSession;
+
+    // Night/Day Mode Toggle
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const btn = document.getElementById('toggleBtn');
+
+      if (html.classList.contains('night-mode')) {
+        html.classList.remove('night-mode');
+        btn.textContent = '🌙 Night Mode';
+        localStorage.setItem('kundaliniTheme', 'light');
+      } else {
+        html.classList.add('night-mode');
+        btn.textContent = '☀️ Day Mode';
+        localStorage.setItem('kundaliniTheme', 'night');
+      }
+    }
+
+    // Load theme on page load
+    window.addEventListener('load', () => {
+      const theme = localStorage.getItem('kundaliniTheme') || 'light';
+      if (theme === 'night') {
+        document.documentElement.classList.add('night-mode');
+        const btn = document.getElementById('toggleBtn');
+        if (btn) btn.textContent = '☀️ Day Mode';
+      }
+    });
+  </script>
+
+  <!-- Night/Day Toggle Button -->
+  <button class="toggle-btn" onclick="toggleDarkMode()" id="toggleBtn">🌙 Night Mode</button>
+</body>
+
+</html>

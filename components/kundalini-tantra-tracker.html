@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kundalini Chakra Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary-purple: #7145c5;
+      --accent-purple: #a78bfa;
+      --lighter-purple: #ede9fe;
+      --night-bg: #181825;
+      --night-card: #26223c;
+      --night-text: #eee;
+      --night-table: #282040;
+      --night-muted: #889;
+    }
+
+    * {
+      transition: all 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--lighter-purple);
+      min-height: 100vh;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      color: #333;
+    }
+
+    html.night-mode body {
+      background: var(--night-bg);
+      color: var(--night-text);
+    }
+
+    /* Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--primary-purple), #5a35a0);
+      color: white;
+      padding: 2rem 0;
+      box-shadow: 0 4px 20px rgba(113, 69, 197, 0.2);
+      margin-bottom: 2rem;
+      border-bottom: 3px solid var(--accent-purple);
+    }
+
+    html.night-mode .page-header {
+      background: linear-gradient(135deg, var(--night-card), #3a3150);
+      box-shadow: 0 4px 20px rgba(113, 69, 197, 0.3);
+    }
+
+    .page-header h2 {
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .page-header .btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+    }
+
+    .page-header .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.8);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    /* Section Headers */
+    h4 {
+      font-weight: 700;
+      color: var(--primary-purple);
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.8rem;
+    }
+
+    h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+      border-radius: 2px;
+    }
+
+    html.night-mode h4 {
+      color: var(--accent-purple);
+    }
+
+    /* Cards */
+    .card {
+      border: 2px solid var(--accent-purple);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(113, 69, 197, 0.12);
+      background: white;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 32px rgba(113, 69, 197, 0.2);
+      transform: translateY(-4px);
+    }
+
+    html.night-mode .card {
+      background: var(--night-card);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    .card-clickable {
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      margin-bottom: 1rem;
+      padding: 1.5rem !important;
+    }
+
+    .card-clickable:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(113, 69, 197, 0.25);
+      border-color: var(--primary-purple);
+    }
+
+    .card-clickable h5 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    .card-clickable small {
+      color: #999;
+      font-weight: 500;
+    }
+
+    html.night-mode .card-clickable small {
+      color: var(--night-muted);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-purple), #5a35a0);
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      padding: 0.7rem 1.5rem;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #5a35a0, var(--primary-purple));
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(113, 69, 197, 0.3);
+      color: white;
+    }
+
+    .btn-sm {
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.25s;
+    }
+
+    .btn-success {
+      background: #10b981;
+      border: none;
+      font-weight: 600;
+    }
+
+    .btn-success:hover {
+      background: #059669;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+    }
+
+    /* List Group */
+    .list-group-item {
+      border: 1px solid var(--accent-purple);
+      background: white;
+      transition: all 0.25s;
+      font-weight: 500;
+    }
+
+    .list-group-item:hover {
+      background: var(--lighter-purple);
+      border-color: var(--primary-purple);
+      transform: translateX(4px);
+    }
+
+    html.night-mode .list-group-item {
+      background: var(--night-table);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    html.night-mode .list-group-item:hover {
+      background: rgba(113, 69, 197, 0.15);
+    }
+
+    /* Progress Bars */
+    .progress {
+      background: #e9e5f5;
+      height: 28px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(113, 69, 197, 0.1);
+      margin-bottom: 1rem;
+    }
+
+    html.night-mode .progress {
+      background: var(--night-table);
+    }
+
+    .progress-bar {
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.4s;
+      background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+      box-shadow: 0 2px 8px rgba(113, 69, 197, 0.2);
+    }
+
+    /* Table */
+    .table {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--accent-purple);
+      margin-bottom: 2rem;
+    }
+
+    .table thead {
+      background: linear-gradient(90deg, var(--primary-purple), #5a35a0);
+      color: white;
+    }
+
+    .table thead th {
+      border: none;
+      font-weight: 700;
+      padding: 1rem;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    .table tbody tr {
+      transition: all 0.25s;
+      border-bottom: 1px solid var(--accent-purple);
+    }
+
+    .table tbody tr:hover {
+      background: var(--lighter-purple);
+      transform: scale(1.01);
+    }
+
+    .table td {
+      padding: 1rem;
+      vertical-align: middle;
+      font-weight: 500;
+    }
+
+    html.night-mode .table {
+      background: var(--night-table);
+      color: var(--night-text);
+      border-color: var(--primary-purple);
+    }
+
+    html.night-mode .table thead {
+      background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple));
+    }
+
+    html.night-mode .table tbody tr:hover {
+      background: rgba(113, 69, 197, 0.2);
+    }
+
+    /* Timer Display */
+    .timer-display {
+      background: linear-gradient(135deg, var(--primary-purple), #5a35a0);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+
+    .timer-display:hover {
+      box-shadow: 0 4px 12px rgba(113, 69, 197, 0.3);
+    }
+
+    html.night-mode .timer-display {
+      background: linear-gradient(135deg, var(--accent-purple), var(--primary-purple));
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2000;
+      background: linear-gradient(135deg, var(--primary-purple), #5a35a0);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      box-shadow: 0 6px 24px rgba(113, 69, 197, 0.3);
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .toggle-btn:hover {
+      background: linear-gradient(135deg, #5a35a0, var(--accent-purple));
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 10px 32px rgba(113, 69, 197, 0.4);
+    }
+
+    .toggle-btn:active {
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    /* Results Section */
+    #resultsSection {
+      margin: 2rem 0;
+    }
+
+    .kpi-card {
+      background: linear-gradient(135deg, var(--primary-purple), #5a35a0);
+      color: white;
+      border: none;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    html.night-mode .kpi-card {
+      background: linear-gradient(135deg, var(--night-card), #3a3150);
+      border: 2px solid var(--primary-purple);
+    }
+
+    .kpi-card h3 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 1.5rem 0;
+      }
+
+      .page-header h2 {
+        font-size: 1.5rem;
+      }
+
+      h4 {
+        margin-top: 1.5rem;
+        font-size: 1.2rem;
+      }
+
+      .toggle-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        bottom: 1.5rem;
+        right: 1.5rem;
+      }
+
+      .card-clickable {
+        margin-bottom: 0.8rem;
+        padding: 1rem !important;
+      }
+    }
+
+    .d-flex input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--primary-purple);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>🕉️ Kundalini Chakra Tracker</h2>
+        <button class="btn" onclick="goToOtherPage()">📱 Open Progress Tracker</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container pb-5">
+    <!-- Chakra Cards -->
+    <h4>🔮 Chakra Activation</h4>
+    <div class="row g-3 mb-4" id="chakraCards"></div>
+
+    <!-- Body Part Cards -->
+    <h4>💪 Body Part / Energy Focus</h4>
+    <div class="row g-3 mb-4" id="bodyCards"></div>
+
+    <!-- Exercise Details -->
+    <div id="exerciseSection"></div>
+
+    <!-- Daily KPI Save -->
+    <div class="card p-4 mb-4">
+      <h4>📊 Daily Progress Tracker</h4>
+      <p class="mb-3">Mark exercises completed and track time for KPI calculation:</p>
+      <button class="btn btn-primary btn-lg w-100" onclick="saveDaily()">💾 Save Today's Progress</button>
+    </div>
+
+    <!-- Results -->
+    <div id="resultsSection"></div>
+
+    <!-- History & Chart -->
+    <div class="card p-4 mb-4">
+      <h4>📈 Historical Progress</h4>
+      <div id="historyTable" class="mb-4"></div>
+      <canvas id="progressChart" class="mt-4"></canvas>
+    </div>
+  </div>
+
+  <!-- Night/Day Toggle Button -->
+  <button class="toggle-btn" onclick="toggleDarkMode()" id="toggleBtn">🌙 Night Mode</button>
+
+  <script>
+    // --------- Data ---------
+    const chakras = [
+      { name: 'Root', sanskrit: 'Muladhara', color: '#e74c3c', mantra: 'LAM', exercises: ['Mula Bandha', 'Mountain Pose', 'Squats', 'Walking barefoot'], kpi: 'PS' },
+      { name: 'Sacral', sanskrit: 'Swadhisthana', color: '#e67e22', mantra: 'VAM', exercises: ['Butterfly Pose', 'Pigeon Pose', 'Pelvic Tilts', 'Creative Expression'], kpi: 'PR' },
+      { name: 'Solar Plexus', sanskrit: 'Manipura', color: '#f1c40f', mantra: 'RAM', exercises: ['Plank', 'Boat Pose', 'Kapalabhati', 'Sun Salutations'], kpi: 'PS/MS' },
+      { name: 'Heart', sanskrit: 'Anahata', color: '#2ecc71', mantra: 'YAM', exercises: ['Camel Pose', 'Cobra Pose', 'Heart Meditation', 'Loving-kindness Meditation'], kpi: 'ES' },
+      { name: 'Throat', sanskrit: 'Vishuddha', color: '#3498db', mantra: 'HAM', exercises: ['Neck Stretches', 'Singing', 'Ujjayi Pranayama', 'Journaling'], kpi: 'ES/MS' },
+      { name: 'Third Eye', sanskrit: 'Ajna', color: '#8e44ad', mantra: 'OM', exercises: ['Third Eye Meditation', 'Trataka', 'Visualization', 'Mindfulness'], kpi: 'MS' },
+      { name: 'Crown', sanskrit: 'Sahasrara', color: '#9b59b6', mantra: 'Silence/OM', exercises: ['Silent Meditation', 'Yoga Nidra', 'Headstand', 'Selfless Service'], kpi: 'SS' }
+    ];
+
+    const bodyParts = [
+      { part: 'Legs & Feet', chakra: 'Root', focus: 'PS', exercises: ['Tadasana', 'Mountain Pose', 'Squats', 'Walking barefoot'], mantra: 'LAM' },
+      { part: 'Pelvis & Reproductive Organs', chakra: 'Sacral', focus: 'PR', exercises: ['Butterfly Pose', 'Pigeon Pose', 'Pelvic Tilts', 'Dance/Art'], mantra: 'VAM' },
+      { part: 'Core & Abdomen', chakra: 'Solar Plexus', focus: 'PS/MS', exercises: ['Plank', 'Boat Pose', 'Breath of Fire', 'Sun Salutations'], mantra: 'RAM' },
+      { part: 'Heart & Chest', chakra: 'Heart', focus: 'ES', exercises: ['Camel Pose', 'Cobra Pose', 'Heart Meditation', 'Loving-kindness Meditation'], mantra: 'YAM' },
+      { part: 'Throat & Neck', chakra: 'Throat', focus: 'ES/MS', exercises: ['Neck Stretches', 'Singing', 'Ujjayi Pranayama', 'Journaling'], mantra: 'HAM' },
+      { part: 'Eyes & Mind', chakra: 'Third Eye', focus: 'MS', exercises: ['Third Eye Meditation', 'Trataka', 'Visualization', 'Mindfulness'], mantra: 'OM' },
+      { part: 'Brain / Consciousness', chakra: 'Crown', focus: 'SS', exercises: ['Silent Meditation', 'Yoga Nidra', 'Selfless Service', 'Spiritual Study'], mantra: 'OM/Silence' }
+    ];
+
+    // --------- Populate Cards ---------
+    const chakraDiv = document.getElementById('chakraCards');
+    chakras.forEach(c => {
+      chakraDiv.innerHTML += `<div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card card-clickable text-center" style="border-left: 5px solid ${c.color}" onclick="showExercises('${c.name}')">
+          <h5 style="color: ${c.color}; margin-top: 0.5rem;">🔷 ${c.name}</h5>
+          <small>${c.sanskrit}</small>
+          <small class="d-block mt-1" style="font-size: 0.75rem;">Mantra: ${c.mantra}</small>
+        </div>
+      </div>`;
+    });
+
+    const bodyDiv = document.getElementById('bodyCards');
+    bodyParts.forEach(b => {
+      bodyDiv.innerHTML += `<div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card card-clickable text-center" onclick="showExercises('${b.part}')">
+          <h5 style="margin-top: 0.5rem;">💪 ${b.part}</h5>
+          <small>Chakra: ${b.chakra}</small>
+          <small class="d-block mt-1" style="font-size: 0.75rem;">Focus: ${b.focus}</small>
+        </div>
+      </div>`;
+    });
+
+    // --------- Show Exercises with Timer ---------
+    let currentExercises = [];
+    let timers = {};
+
+    function showExercises(name) {
+      let data = chakras.find(c => c.name === name) || bodyParts.find(b => b.part === name);
+      if (!data) return;
+      currentExercises = data.exercises.map(ex => ({ name: ex, done: false, kpi: data.kpi || data.focus, sec: 0 }));
+
+      let html = `<div class="card p-4 mb-4">
+        <h4>${name}</h4>
+        <p class="mb-3"><strong>Mantra:</strong> ${data.mantra || 'OM'}</p>
+        <div class="list-group">`;
+
+      currentExercises.forEach((ex, i) => {
+        html += `<li class="list-group-item">
+          <div class="d-flex justify-content-between align-items-center gap-2 flex-wrap">
+            <div>
+              <input type="checkbox" id="check${i}" onchange="currentExercises[${i}].done = this.checked">
+              <label for="check${i}" class="ms-2 mb-0" style="cursor: pointer; font-weight: 600;">${ex.name}</label>
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+              <button class="btn btn-sm btn-success" onclick="toggleTimer(${i})">
+                <span id="btnText${i}">▶ Start</span>
+              </button>
+              <span class="timer-display" id="timer${i}">00:00</span>
+            </div>
+          </div>
+        </li>`;
+      });
+
+      html += `</div></div>`;
+      document.getElementById('exerciseSection').innerHTML = html;
+      window.scrollTo({ top: document.getElementById('exerciseSection').offsetTop - 100, behavior: 'smooth' });
+    }
+
+    // --------- Timer Functions ---------
+    function toggleTimer(i) {
+      const btnText = document.getElementById('btnText' + i);
+      if (timers[i]) {
+        clearInterval(timers[i]);
+        timers[i] = null;
+        btnText.textContent = '▶ Start';
+        return;
+      }
+      btnText.textContent = '⏸ Stop';
+      timers[i] = setInterval(() => {
+        currentExercises[i].sec++;
+        const m = String(Math.floor(currentExercises[i].sec / 60)).padStart(2, '0');
+        const s = String(currentExercises[i].sec % 60).padStart(2, '0');
+        document.getElementById('timer' + i).innerText = `${m}:${s}`;
+      }, 1000);
+    }
+
+    // --------- Save Daily ---------
+    function saveDaily() {
+      if (currentExercises.length == 0) {
+        alert('Select exercises first');
+        return;
+      }
+      const today = new Date().toISOString().split('T')[0];
+      let score = { PS: 0, PR: 0, MS: 0, ES: 0, SS: 0 };
+      currentExercises.forEach(ex => {
+        if (ex.done) {
+          ex.kpi.split('/').forEach(k => { score[k] += 1; });
+        }
+      });
+      score.KPI = ((score.PS + score.PR + score.MS + score.ES + score.SS) / Math.max(1, currentExercises.length)).toFixed(2);
+      let db = JSON.parse(localStorage.getItem('kundaliniDB') || '[]');
+      db.push({ date: today, ...score });
+      localStorage.setItem('kundaliniDB', JSON.stringify(db));
+      showResults(db);
+      alert('✅ Progress saved successfully!');
+    }
+
+    // --------- Show Results & History ---------
+    function showResults(db) {
+      const latest = db[db.length - 1];
+      let improvement = '';
+      if (db.length > 1) {
+        const prevKPI = parseFloat(db[db.length - 2].KPI);
+        const diff = ((latest.KPI - prevKPI) / prevKPI * 100).toFixed(1);
+        improvement = diff >= 0 ? `📈 +${diff}% improvement` : `📉 ${diff}% change`;
+      }
+
+      let html = `<div class="card kpi-card mb-4">
+        <h3>🎯 Today's KPI</h3>
+        <h2>${latest.KPI} / 10</h2>
+        <p class="mb-0">${improvement}</p>
+      </div>
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <small class="text-muted">Physical (PS)</small>
+            <div class="progress mt-2" style="height: 24px;"><div class="progress-bar bg-danger" style="width: ${latest.PS * 20}%">${latest.PS}</div></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <small class="text-muted">Prana (PR)</small>
+            <div class="progress mt-2" style="height: 24px;"><div class="progress-bar bg-warning" style="width: ${latest.PR * 20}%">${latest.PR}</div></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <small class="text-muted">Mind (MS)</small>
+            <div class="progress mt-2" style="height: 24px;"><div class="progress-bar bg-info" style="width: ${latest.MS * 20}%">${latest.MS}</div></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <small class="text-muted">Emotion (ES)</small>
+            <div class="progress mt-2" style="height: 24px;"><div class="progress-bar bg-success" style="width: ${latest.ES * 20}%">${latest.ES}</div></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <small class="text-muted">Spiritual (SS)</small>
+            <div class="progress mt-2" style="height: 24px;"><div class="progress-bar bg-secondary" style="width: ${latest.SS * 20}%">${latest.SS}</div></div>
+          </div>
+        </div>
+      </div>`;
+
+      document.getElementById('resultsSection').innerHTML = html;
+      showHistory(db);
+      renderChart(db);
+    }
+
+    // --------- History & Chart ---------
+    function showHistory(db) {
+      let html = `<table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>KPI</th>
+            <th>Physical</th>
+            <th>Prana</th>
+            <th>Mind</th>
+            <th>Emotion</th>
+            <th>Spiritual</th>
+          </tr>
+        </thead>
+        <tbody>`;
+      db.forEach(d => {
+        html += `<tr>
+          <td><strong>${d.date}</strong></td>
+          <td>${d.KPI}</td>
+          <td>${d.PS}</td>
+          <td>${d.PR}</td>
+          <td>${d.MS}</td>
+          <td>${d.ES}</td>
+          <td>${d.SS}</td>
+        </tr>`;
+      });
+      html += `</tbody></table>`;
+      document.getElementById('historyTable').innerHTML = html;
+    }
+
+    function renderChart(db) {
+      const labels = db.map(d => d.date);
+      const kpiData = db.map(d => parseFloat(d.KPI));
+      const psData = db.map(d => d.PS);
+      const prData = db.map(d => d.PR);
+      const msData = db.map(d => d.MS);
+      const esData = db.map(d => d.ES);
+      const ssData = db.map(d => d.SS);
+
+      const ctx = document.getElementById('progressChart').getContext('2d');
+      if (window.kpiChart) window.kpiChart.destroy();
+
+      window.kpiChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'KPI (Overall)',
+              data: kpiData,
+              borderColor: '#7145c5',
+              backgroundColor: 'rgba(113, 69, 197, 0.1)',
+              fill: true,
+              tension: 0.4,
+              pointRadius: 5,
+              pointHoverRadius: 8,
+              pointBackgroundColor: '#7145c5',
+              pointBorderColor: '#fff',
+              pointBorderWidth: 2,
+              borderWidth: 3,
+              spanGaps: true
+            },
+            {
+              label: 'Physical (PS)',
+              data: psData,
+              borderColor: '#e74c3c',
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            },
+            {
+              label: 'Prana (PR)',
+              data: prData,
+              borderColor: '#e67e22',
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            },
+            {
+              label: 'Mind (MS)',
+              data: msData,
+              borderColor: '#3498db',
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            },
+            {
+              label: 'Emotion (ES)',
+              data: esData,
+              borderColor: '#2ecc71',
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            },
+            {
+              label: 'Spiritual (SS)',
+              data: ssData,
+              borderColor: '#9b59b6',
+              borderDash: [5, 5],
+              fill: false,
+              tension: 0.3,
+              pointRadius: 3,
+              borderWidth: 2,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                font: { weight: '600' },
+                padding: 15,
+                usePointStyle: true
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 10,
+              ticks: {
+                stepSize: 1,
+                font: { weight: '600' }
+              },
+              grid: {
+                color: 'rgba(113, 69, 197, 0.1)'
+              }
+            },
+            x: {
+              grid: {
+                color: 'rgba(113, 69, 197, 0.05)'
+              }
+            }
+          },
+          animation: {
+            duration: 700,
+            easing: 'easeInOutQuart'
+          }
+        }
+      });
+    }
+
+    // --------- Dark/Light Mode Toggle ---------
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const btn = document.getElementById('toggleBtn');
+
+      if (html.classList.contains('night-mode')) {
+        html.classList.remove('night-mode');
+        btn.textContent = '🌙 Night Mode';
+        localStorage.setItem('kundaliniTheme', 'light');
+      } else {
+        html.classList.add('night-mode');
+        btn.textContent = '☀️ Day Mode';
+        localStorage.setItem('kundaliniTheme', 'night');
+      }
+    }
+
+    // --------- Initialize ---------
+    window.addEventListener('load', () => {
+      let db = JSON.parse(localStorage.getItem('kundaliniDB') || '[]');
+      if (db.length > 0) showResults(db);
+
+      const theme = localStorage.getItem('kundaliniTheme') || 'light';
+      if (theme === 'night') {
+        document.documentElement.classList.add('night-mode');
+        document.getElementById('toggleBtn').textContent = '☀️ Day Mode';
+      }
+    });
+
+    // Redirect helper
+    function goToOtherPage() {
+      window.location.href = 'kundalini-tracker.html';
+    }
+  </script>
+</body>
+
+</html>
