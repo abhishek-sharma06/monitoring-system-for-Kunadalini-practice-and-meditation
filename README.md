@@ -8,7 +8,7 @@
 
 - Author / Developer : Abhishek Sharma M
 - Mail : abhisheksharmam6 [at] gmail [dot] com
-- Working link : https://avinaykumar26.github.io/Analysis-and-Monitoring-System-for-Kundalini-Tantra-Practices-and-Meditation/
+- Working link : https://abhishek-sharma06.github.io/monitoring-system-for-Kunadalini-practice-and-meditation/
 - View in any browser using above link , loading dashboard can take some time .
 - Github : (https://github.com/abhishek-sharma06)
 - LinkedIn : www.linkedin.com/in/abhisheksharma6
