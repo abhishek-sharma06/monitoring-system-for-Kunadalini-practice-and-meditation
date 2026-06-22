@@ -25,7 +25,6 @@ const UserLogin = () => {
       const res = await api.post('/api/auth/login', formData);
       if (res.data.success) {
         const { token, user } = res.data.data;
-        // Redirect admin who tries user portal back to admin portal.
         if (user.role === 'admin') {
           setError('This is the user portal. Please use the Admin Login instead.');
           setLoading(false);
@@ -35,10 +34,11 @@ const UserLogin = () => {
         navigate('/dashboard');
       }
     } catch (err) {
-      if (typeof err === 'string' && err.includes('verify your email')) {
+      const msg = typeof err === 'string' ? err : '';
+      if (msg.toLowerCase().includes('verify your email')) {
         setShowResend(true);
       }
-      setError(typeof err === 'string' ? err : 'Invalid email or password.');
+      setError(msg || 'Invalid email or password.');
     } finally {
       setLoading(false);
     }

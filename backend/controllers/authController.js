@@ -57,11 +57,19 @@ exports.register = async (req, res) => {
       </div>
     `;
 
-    await sendEmail({ to: email, subject: 'Verify your Kundalini account', html: htmlContent });
+    const emailResult = await sendEmail({ to: email, subject: 'Verify your Kundalini account', html: htmlContent });
 
-    res.status(201).json({ success: true, message: 'Registration successful. Please check your email to verify your account.' });
+    // If email wasn't actually delivered, include the link in the response so the user can verify manually.
+    const responsePayload = { success: true, message: 'Registration successful. Please check your email to verify your account.' };
+    if (emailResult && !emailResult.delivered && emailResult.link) {
+      responsePayload.message = 'Registration successful. Email could not be delivered — use the link below to verify your account.';
+      responsePayload.verifyLink = emailResult.link;
+    }
+
+    res.status(201).json(responsePayload);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('Register error:', error);
+    res.status(500).json({ success: false, message: 'Registration failed. Please try again.' });
   }
 };
 
@@ -92,7 +100,8 @@ exports.verifyEmail = async (req, res) => {
 
     res.status(200).json({ success: true, message: 'Email verified. You can now login.' });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('Verify email error:', error);
+    res.status(500).json({ success: false, message: 'Verification failed. Please try again.' });
   }
 };
 
@@ -107,7 +116,8 @@ exports.resendVerification = async (req, res) => {
     // Query user to verify status.
     const [users] = await pool.query('SELECT id, is_verified FROM users WHERE email = ?', [email]);
     if (users.length === 0) {
-      return res.status(404).json({ success: false, message: 'User not found.' });
+      // Return success even if user not found to prevent email enumeration
+      return res.status(200).json({ success: true, message: 'If an account exists, a verification email has been sent.' });
     }
 
     const user = users[0];
@@ -136,11 +146,18 @@ exports.resendVerification = async (req, res) => {
       </div>
     `;
 
-    await sendEmail({ to: email, subject: 'Verify your Kundalini account', html: htmlContent });
+    const emailResult = await sendEmail({ to: email, subject: 'Verify your Kundalini account', html: htmlContent });
 
-    res.status(200).json({ success: true, message: 'Verification email resent.' });
+    const responsePayload = { success: true, message: 'Verification email resent.' };
+    if (emailResult && !emailResult.delivered && emailResult.link) {
+      responsePayload.message = 'Email could not be delivered. Use the link below to verify.';
+      responsePayload.verifyLink = emailResult.link;
+    }
+
+    res.status(200).json(responsePayload);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('Resend verification error:', error);
+    res.status(500).json({ success: false, message: 'Failed to resend verification email. Please try again.' });
   }
 };
 
@@ -183,7 +200,8 @@ exports.login = async (req, res) => {
       message: 'Login successful.'
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('Login error:', error);
+    res.status(500).json({ success: false, message: 'Login failed. Please try again.' });
   }
 };
 
@@ -207,9 +225,9 @@ exports.forgotPassword = async (req, res) => {
     const token = crypto.randomBytes(32).toString('hex');
     const tokenExpires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 
-    // Update reset token details.
+    // Update reset token details (uses separate reset_token columns to avoid overwriting verification_token).
     await pool.query(
-      'UPDATE users SET verification_token = ?, token_expires_at = ? WHERE id = ?',
+      'UPDATE users SET reset_token = ?, reset_token_expires_at = ? WHERE id = ?',
       [token, tokenExpires, user.id]
     );
 
@@ -229,7 +247,8 @@ exports.forgotPassword = async (req, res) => {
 
     res.status(200).json({ success: true, message: 'Reset email sent if account exists.' });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('Forgot password error:', error);
+    res.status(500).json({ success: false, message: 'Failed to process request. Please try again.' });
   }
 };
 
@@ -241,28 +260,29 @@ exports.resetPassword = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Token and new password are required.' });
     }
 
-    // Query user by reset token.
-    const [users] = await pool.query('SELECT id, token_expires_at FROM users WHERE verification_token = ?', [token]);
+    // Query user by reset token (uses separate reset_token column).
+    const [users] = await pool.query('SELECT id, reset_token_expires_at FROM users WHERE reset_token = ?', [token]);
     if (users.length === 0) {
       return res.status(400).json({ success: false, message: 'Invalid or expired token.' });
     }
 
     const user = users[0];
-    if (new Date() > new Date(user.token_expires_at)) {
+    if (new Date() > new Date(user.reset_token_expires_at)) {
       return res.status(400).json({ success: false, message: 'Link expired.' });
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    // Save new password and clear token columns.
+    // Save new password and clear reset token columns.
     await pool.query(
-      'UPDATE users SET password = ?, verification_token = NULL, token_expires_at = NULL WHERE id = ?',
+      'UPDATE users SET password = ?, reset_token = NULL, reset_token_expires_at = NULL WHERE id = ?',
       [hashedPassword, user.id]
     );
 
     res.status(200).json({ success: true, message: 'Password reset successful.' });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('Reset password error:', error);
+    res.status(500).json({ success: false, message: 'Password reset failed. Please try again.' });
   }
 };
 
@@ -276,7 +296,8 @@ exports.getMe = async (req, res) => {
     }
     res.status(200).json({ success: true, data: users[0] });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('GetMe error:', error);
+    res.status(500).json({ success: false, message: 'Failed to load user profile.' });
   }
 };
 
@@ -296,6 +317,7 @@ exports.acceptDisclaimer = async (req, res) => {
 
     res.status(200).json({ success: true, message: 'Safety disclaimer accepted.' });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('Accept disclaimer error:', error);
+    res.status(500).json({ success: false, message: 'Failed to save disclaimer acceptance.' });
   }
 };

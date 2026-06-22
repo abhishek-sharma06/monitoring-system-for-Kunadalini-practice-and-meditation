@@ -12,9 +12,11 @@ export default function Chatbot() {
         <div className="md:col-span-1 bg-white border border-border rounded-2xl p-4">
           <h3 className="text-sm font-bold mb-2">How to use</h3>
           <ul className="text-xs text-text-secondary list-disc pl-4 space-y-1">
-            <li>Ask for breath techniques: "How long should I inhale for beginner level?"</li>
-            <li>Request mantra guidance: "Play the mantra for Heart chakra"</li>
-            <li>Ask practice tips: "How do I keep my spine straight during practice?"</li>
+            <li>Breathwork: "How long should I inhale for beginner level?"</li>
+            <li>Mantra guidance: "What mantra should I use for the Heart chakra?"</li>
+            <li>Chakra info: "What are the benefits of activating the Third Eye?"</li>
+            <li>Posture tips: "How do I keep my spine straight during practice?"</li>
+            <li>Practice progress: "What does my 5D score mean?"</li>
           </ul>
         </div>
       </div>

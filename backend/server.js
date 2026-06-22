@@ -112,11 +112,7 @@ const runSchemaMigrations = async (pool) => {
 
 // ─── Step 3 — Register API routes ────────────────────────────────────────────
 const bindRoutes = (pool) => {
-  // Attach rate limiter.
-  const { standardLimiter } = require('./middleware/rateLimiter');
-  app.use('/api', standardLimiter);
-
-  // Mount route modules.
+  // Mount route modules (each has its own rate limiter where needed).
   app.use('/api/auth',      require('./routes/authRoutes'));
   app.use('/api/sessions',  require('./routes/sessionRoutes'));
   app.use('/api/programs',  require('./routes/programRoutes')); // Program/days/day-completion endpoints

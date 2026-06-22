@@ -30,7 +30,6 @@ import DayFlow from './pages/DayFlow';
 // Import Admin Pages.
 import AdminDashboard from './pages/admin/AdminDashboard';
 import UserList from './pages/admin/UserList';
-import PlatformAnalytics from './pages/admin/PlatformAnalytics';
 
 // Main App component assembling layout structures.
 function App() {
@@ -74,7 +73,6 @@ function App() {
               <Route element={<AdminRoute />}>
                 <Route path="/admin"            element={<AdminDashboard />} />
                 <Route path="/admin/users"      element={<UserList />} />
-                <Route path="/admin/analytics"  element={<PlatformAnalytics />} />
               </Route>
 
               {/* Catch all — redirect to login selector */}

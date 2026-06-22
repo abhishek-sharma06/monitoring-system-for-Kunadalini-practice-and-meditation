@@ -11,6 +11,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [registered, setRegistered] = useState(false);
+  const [verifyLink, setVerifyLink] = useState('');
   const [resendStatus, setResendStatus] = useState('');
 
   // Evaluate password strength: returns 'Weak', 'Medium', or 'Strong'.
@@ -38,6 +39,7 @@ const Register = () => {
       const res = await api.post('/api/auth/register', formData);
       if (res.data.success) {
         setRegistered(true);
+        if (res.data.verifyLink) setVerifyLink(res.data.verifyLink);
       }
     } catch (err) {
       setError(typeof err === 'string' ? err : 'Registration failed. Try again.');
@@ -51,7 +53,8 @@ const Register = () => {
     try {
       const res = await api.post('/api/auth/resend-verification', { email: formData.email });
       if (res.data.success) {
-        setResendStatus('Verification link resent successfully!');
+        setResendStatus(res.data.message || 'Verification link resent successfully!');
+        if (res.data.verifyLink) setVerifyLink(res.data.verifyLink);
       }
     } catch (err) {
       setResendStatus(typeof err === 'string' ? err : 'Failed to resend verification.');
@@ -69,6 +72,22 @@ const Register = () => {
           <p className="text-sm text-text-secondary mb-6 leading-relaxed">
             We have sent a verification link to <strong className="text-text-primary">{formData.email}</strong>. Please click the link to verify your account.
           </p>
+
+          {/* Show verification link directly if email couldn't be delivered */}
+          {verifyLink && (
+            <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl text-left">
+              <p className="text-xs font-bold text-yellow-700 mb-2">Email could not be delivered. Use this link to verify:</p>
+              <a
+                href={verifyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-accent-primary font-semibold break-all underline"
+              >
+                {verifyLink}
+              </a>
+            </div>
+          )}
+
           <div className="flex flex-col gap-4">
             <button
               onClick={handleResend}

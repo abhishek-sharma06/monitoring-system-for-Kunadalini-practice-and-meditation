@@ -1,4 +1,3 @@
-// Import React hooks, contexts, and axios client.
 import React, { createContext, useState, useEffect } from 'react';
 import api from '../api/axios';
 
@@ -8,37 +7,36 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Auto-verify and restore session on application load.
   useEffect(() => {
     const restoreSession = async () => {
       const token = sessionStorage.getItem('token');
-      if (token) {
-        try {
-          const res = await api.get('/api/auth/me');
-          if (res.data.success) {
-            setUser(res.data.data);
-          } else {
-            logout();
-          }
-        } catch (error) {
-          console.error('Session restoration failed:', error);
-          logout();
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+      try {
+        const res = await api.get('/api/auth/me');
+        if (res.data.success) {
+          setUser(res.data.data);
+        } else {
+          sessionStorage.removeItem('token');
         }
+      } catch (error) {
+        // If the server is unreachable or returns an error, clear the stale token
+        sessionStorage.removeItem('token');
       }
       setLoading(false);
     };
     restoreSession();
   }, []);
 
-  // Save token, user data, and update context state.
   const login = (token, userData) => {
     sessionStorage.setItem('token', token);
     setUser(userData);
   };
 
-  // Clear session storage and reset context state.
   const logout = () => {
-    sessionStorage.clear();
+    sessionStorage.removeItem('token');
     setUser(null);
   };
 

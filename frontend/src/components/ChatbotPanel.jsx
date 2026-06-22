@@ -5,7 +5,7 @@ import api from '../api/axios';
 
 export default function ChatbotPanel({ onClose }) {
   const [messages, setMessages] = useState([
-    { from: 'bot', text: 'Hi — I can help with practice tips, breath techniques, and mantra guidance. How can I assist you today?', ts: Date.now() }
+    { from: 'bot', text: 'Namaste! I\'m your practice assistant. I can help with breathwork techniques, mantra guidance, chakra information, posture tips, and understanding your progress. What would you like to know?', ts: Date.now() }
   ]);
   const [loading, setLoading] = useState(false);
   const containerRef = useRef(null);

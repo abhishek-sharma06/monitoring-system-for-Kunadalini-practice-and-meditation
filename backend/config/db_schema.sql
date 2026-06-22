@@ -160,8 +160,9 @@ VALUES
 ('five_d_high', 'Elevated 5D', 'Achieve a 5D score of 80% or higher'),
 ('consistency_10', '10 Days Consistent', 'Log 10 practice sessions');
 
-INSERT IGNORE INTO users (name, email, password, role, is_verified)
-VALUES ('Admin', 'admin@kundalini.com', '$2b$10$3YmG9j3D/MhK75aK6uTjY.8eLCS5yG/7oK6C2Vv1Fh/q7V11x6Nte', 'admin', true);
+INSERT INTO users (name, email, password, role, is_verified)
+VALUES ('Admin', 'admin@kundalini.com', '$2b$10$viphFZCZLdmwcGyfPqSH0OoMJS3SB3.TKf1cFJCSKvI6Ra61hI8Q6', 'admin', true)
+ON DUPLICATE KEY UPDATE password = '$2b$10$viphFZCZLdmwcGyfPqSH0OoMJS3SB3.TKf1cFJCSKvI6Ra61hI8Q6';
 
 -- Seed statements to insert 3 structured programs.
 INSERT IGNORE INTO programs (id, name, level, total_days, description)

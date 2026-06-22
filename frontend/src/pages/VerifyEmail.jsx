@@ -1,24 +1,19 @@
-// Import React hooks, routing tools, API clients, icons, and components.
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import api from '../api/axios';
 import LoadingSpinner from '../components/LoadingSpinner';
-import SafetyDisclaimer from '../components/SafetyDisclaimer';
 import { CheckCircle, AlertCircle } from 'lucide-react';
 
-// VerifyEmail page component - shows email verification status and safety disclaimer after successful verification.
 const VerifyEmail = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
-  const [status, setStatus] = useState('verifying'); // verifying, success, error
+  const [status, setStatus] = useState('verifying');
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [resendStatus, setResendStatus] = useState('');
-  // Track if user should see safety disclaimer (shown after email verification succeeds)
-  const [showDisclaimerAfterVerify, setShowDisclaimerAfterVerify] = useState(false);
+  const [resendLink, setResendLink] = useState('');
 
   useEffect(() => {
-    // Fetch verification from backend when component mounts or token changes
     const triggerVerify = async () => {
       if (!token) {
         setStatus('error');
@@ -30,8 +25,6 @@ const VerifyEmail = () => {
         if (res.data.success) {
           setStatus('success');
           setMessage(res.data.message);
-          // Show safety disclaimer after email is verified
-          setShowDisclaimerAfterVerify(true);
         }
       } catch (err) {
         setStatus('error');
@@ -40,20 +33,6 @@ const VerifyEmail = () => {
     };
     triggerVerify();
   }, [token]);
-
-  // Handle user accepting the safety disclaimer - save acceptance and redirect to login
-  const handleDisclaimerAccept = async () => {
-    try {
-      // Call API to mark disclaimer as accepted by user
-      await api.post('/api/auth/accept-disclaimer');
-      // Redirect to login page after disclaimer is accepted
-      window.location.href = '/login/user';
-    } catch (err) {
-      console.error('Failed to save disclaimer acceptance:', err);
-      // Still allow user to proceed to login if API fails
-      window.location.href = '/login/user';
-    }
-  };
 
   const handleResend = async (e) => {
     e.preventDefault();
@@ -65,7 +44,8 @@ const VerifyEmail = () => {
     try {
       const res = await api.post('/api/auth/resend-verification', { email });
       if (res.data.success) {
-        setResendStatus('Verification link resent successfully!');
+        setResendStatus(res.data.message || 'Verification link resent successfully!');
+        if (res.data.verifyLink) setResendLink(res.data.verifyLink);
       }
     } catch (err) {
       setResendStatus(typeof err === 'string' ? err : 'Resend request failed.');
@@ -73,17 +53,7 @@ const VerifyEmail = () => {
   };
 
   return (
-    <>
-      {/* Show safety disclaimer modal if email verified successfully */}
-      {showDisclaimerAfterVerify && (
-        <SafetyDisclaimer 
-          mode="detailed" 
-          onAccept={handleDisclaimerAccept}
-        />
-      )}
-
-      {/* Main verification status UI */}
-      <div className="min-h-screen bg-background-primary flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background-primary flex items-center justify-center p-4">
       <div className="bg-white border border-border rounded-3xl p-8 max-w-md w-full shadow-sm text-center">
         {status === 'verifying' && (
           <div className="py-6">
@@ -138,6 +108,14 @@ const VerifyEmail = () => {
                 Resend Verification Link
               </button>
               {resendStatus && <p className="text-xs font-semibold mt-1 text-accent-primary">{resendStatus}</p>}
+              {resendLink && (
+                <div className="mt-2 p-3 bg-yellow-50 border border-yellow-200 rounded-xl text-left">
+                  <p className="text-xs font-bold text-yellow-700 mb-1">Use this link to verify:</p>
+                  <a href={resendLink} target="_blank" rel="noopener noreferrer" className="text-xs text-accent-primary font-semibold break-all underline">
+                    {resendLink}
+                  </a>
+                </div>
+              )}
             </form>
 
             <Link to="/login/user" className="mt-6 text-xs font-bold text-text-secondary hover:underline">
@@ -147,9 +125,7 @@ const VerifyEmail = () => {
         )}
       </div>
     </div>
-    </>
   );
 };
 
-// Export VerifyEmail.
 export default VerifyEmail;

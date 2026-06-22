@@ -16,7 +16,7 @@ export default function ChatInput({ onSend, loading }) {
         value={text}
         onChange={(e) => setText(e.target.value)}
         rows={2}
-        placeholder={loading ? 'Waiting for response...' : 'Ask about breath, mantra, or practice tips'}
+        placeholder={loading ? 'Waiting for response...' : 'Ask about breathwork, mantras, chakras, or practice tips'}
         className="form-input w-full min-h-[3.5rem] resize-none"
         disabled={loading}
       />
