@@ -75,16 +75,17 @@ const Register = () => {
 
           {/* Show verification link directly if email couldn't be delivered */}
           {verifyLink && (
-            <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl text-left">
-              <p className="text-xs font-bold text-yellow-700 mb-2">Email could not be delivered. Use this link to verify:</p>
+            <div className="mb-6 p-4 bg-yellow-50 border-2 border-yellow-300 rounded-xl text-left">
+              <p className="text-sm font-bold text-yellow-800 mb-2">Email could not be delivered. Click below to verify:</p>
               <a
                 href={verifyLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-accent-primary font-semibold break-all underline"
+                className="block w-full text-center py-2.5 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition text-sm"
               >
-                {verifyLink}
+                Verify My Email Now
               </a>
+              <p className="text-[10px] text-yellow-600 mt-2 break-all">{verifyLink}</p>
             </div>
           )}
 

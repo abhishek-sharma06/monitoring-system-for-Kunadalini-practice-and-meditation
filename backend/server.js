@@ -157,7 +157,7 @@ const startServer = async () => {
     // 6. Start listening.
     app.listen(PORT, () => {
       console.log(`\n✓ Server → http://localhost:${PORT}  [${process.env.NODE_ENV || 'development'}]`);
-      console.log(`  Admin login: admin@kundalini.com  /  Admin@123\n`);
+      console.log(`  Admin login: (see .env or setup script for credentials)\n`);
     });
   } catch (err) {
     console.error('✗ Server startup failed:', err.message);

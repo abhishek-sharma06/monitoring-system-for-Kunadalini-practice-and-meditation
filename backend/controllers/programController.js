@@ -185,6 +185,8 @@ exports.startProgram = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Program not found.' });
     }
 
+    const program = programs[0];
+
     // Check if user already has this program in progress.
     const [existing] = await pool.query(
       'SELECT * FROM user_program_progress WHERE user_id = ? AND program_id = ?',

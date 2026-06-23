@@ -14,6 +14,7 @@ const UserLogin = () => {
   const [error, setError] = useState('');
   const [showResend, setShowResend] = useState(false);
   const [resendMessage, setResendMessage] = useState('');
+  const [resendLink, setResendLink] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,9 +47,13 @@ const UserLogin = () => {
 
   const handleResend = async () => {
     setResendMessage('');
+    setResendLink('');
     try {
       const res = await api.post('/api/auth/resend-verification', { email: formData.email });
-      if (res.data.success) setResendMessage('Verification link resent. Check your inbox.');
+      if (res.data.success) {
+        setResendMessage(res.data.message || 'Verification link resent. Check your inbox.');
+        if (res.data.verifyLink) setResendLink(res.data.verifyLink);
+      }
     } catch (err) {
       setResendMessage(typeof err === 'string' ? err : 'Resend request failed.');
     }
@@ -156,6 +161,20 @@ const UserLogin = () => {
             <div className="mb-5 p-4 rounded-xl text-xs font-semibold"
               style={{ background: '#F0FDF4', border: '1px solid #86EFAC', color: '#16A34A' }}>
               {resendMessage}
+            </div>
+          )}
+          {resendLink && (
+            <div className="mb-5 p-4 rounded-xl"
+              style={{ background: '#FFFBEB', border: '1px solid #FCD34D' }}>
+              <p className="text-xs font-bold mb-2" style={{ color: '#92400E' }}>Email could not be delivered. Click to verify:</p>
+              <a
+                href={resendLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center py-2 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition text-xs"
+              >
+                Verify My Email Now
+              </a>
             </div>
           )}
 

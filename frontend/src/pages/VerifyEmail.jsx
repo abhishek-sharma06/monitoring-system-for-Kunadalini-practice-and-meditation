@@ -109,10 +109,11 @@ const VerifyEmail = () => {
               </button>
               {resendStatus && <p className="text-xs font-semibold mt-1 text-accent-primary">{resendStatus}</p>}
               {resendLink && (
-                <div className="mt-2 p-3 bg-yellow-50 border border-yellow-200 rounded-xl text-left">
-                  <p className="text-xs font-bold text-yellow-700 mb-1">Use this link to verify:</p>
-                  <a href={resendLink} target="_blank" rel="noopener noreferrer" className="text-xs text-accent-primary font-semibold break-all underline">
-                    {resendLink}
+                <div className="mt-2 p-3 bg-yellow-50 border-2 border-yellow-300 rounded-xl text-left">
+                  <p className="text-xs font-bold text-yellow-800 mb-2">Email could not be delivered. Click to verify:</p>
+                  <a href={resendLink} target="_blank" rel="noopener noreferrer"
+                    className="block w-full text-center py-2 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition text-xs">
+                    Verify My Email Now
                   </a>
                 </div>
               )}

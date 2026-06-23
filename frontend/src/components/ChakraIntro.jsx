@@ -76,7 +76,7 @@ const ChakraIntro = ({ programDay, onNext }) => {
         onClick={() => onNext({ mantra_played: mantraPlayed })}
         className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all active:scale-95"
       >
-        Ready for Poses
+        Choose Practice Style
       </button>
     </div>
   );

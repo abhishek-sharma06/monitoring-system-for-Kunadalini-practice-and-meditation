@@ -6,6 +6,7 @@ import SafetyReminder from '../components/SafetyReminder';
 import MoodCheckin from '../components/MoodCheckin';
 import BreathWarmup from '../components/BreathWarmup';
 import ChakraIntro from '../components/ChakraIntro';
+import PracticeStyleChooser from '../components/PracticeStyleChooser';
 import PosePractice from '../components/PosePractice';
 import ChantingWithPose from '../components/ChantingWithPose';
 import BreathCooldown from '../components/BreathCooldown';
@@ -37,6 +38,7 @@ const DayFlow = () => {
     positive_expression_frames: 0,
     total_frames: 100,
     mantra_played: false,
+    practice_style: null,
     notes: ''
   });
 
@@ -196,23 +198,24 @@ const DayFlow = () => {
       { id: 2, name: 'Mood Check-in (Before)', component: MoodCheckin },
       { id: 3, name: 'Breathing Warmup', component: BreathWarmup },
       { id: 4, name: 'Chakra Introduction', component: ChakraIntro },
-      { id: 5, name: 'Pose Practice', component: PosePractice },
-      { id: 6, name: 'Chanting with Pose', component: ChantingWithPose },
-      { id: 7, name: 'Cool-down Breathing', component: BreathCooldown },
-      { id: 8, name: 'Mood Check-in (After)', component: MoodCheckin },
-      { id: 9, name: 'Insight Screen', component: InsightScreen }
+      { id: 5, name: 'Practice Style', component: PracticeStyleChooser },
+      { id: 6, name: 'Pose Practice', component: PosePractice },
+      { id: 7, name: 'Chanting with Pose', component: ChantingWithPose },
+      { id: 8, name: 'Cool-down Breathing', component: BreathCooldown },
+      { id: 9, name: 'Mood Check-in (After)', component: MoodCheckin },
+      { id: 10, name: 'Insight Screen', component: InsightScreen }
     ];
   };
 
   const steps = getSteps();
   const CurrentStepComponent = steps[currentStep].component;
-  const isAfterMood = currentStep === 7;
+  const isAfterMood = currentStep === 8;
   const isLastStep = currentStep === steps.length - 1;
   const stepProgress = Math.round(((currentStep + 1) / steps.length) * 100);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-4 md:p-6">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <button
@@ -254,7 +257,7 @@ const DayFlow = () => {
         )}
 
         {/* Step content */}
-        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+        <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-8">
           <CurrentStepComponent
             programDay={programDay}
             sessionData={sessionData}

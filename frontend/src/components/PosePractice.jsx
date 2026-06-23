@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import SessionTimer from './SessionTimer';
-import { Camera, AlertCircle } from 'lucide-react';
+import PoseReference from './PoseReference';
+import { getChakraByName } from '../data/chakraData';
+import { Camera, AlertCircle, ChevronLeft, ChevronRight, Target } from 'lucide-react';
 
-// PosePractice: Step 5 - TensorFlow.js pose detection with Teachable Machine model
 const PosePractice = ({ programDay, onNext, sessionData }) => {
   const [timeSpent, setTimeSpent] = useState(0);
   const [cameraReady, setCameraReady] = useState(false);
@@ -10,8 +11,30 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
   const [loadingText, setLoadingText] = useState('Loading AI libraries...');
   const [predictions, setPredictions] = useState([]);
   const [dominantChakra, setDominantChakra] = useState('');
+  const [currentPoseIndex, setCurrentPoseIndex] = useState(0);
 
   const targetDuration = programDay.session_length_minutes || 10;
+
+  const selectedPoses = sessionData?.selected_poses || [];
+  const practiceStyle = sessionData?.practice_style || 'yoga';
+  const hasMultiplePoses = selectedPoses.length > 1;
+
+  const focusKeyword = programDay.chakra_focus?.split(' ')[0] || 'Root';
+  const chakraNameMap = {
+    Root: 'Root Chakra',
+    Sacral: 'Sacral Chakra',
+    Solar: 'Solar Plexus Chakra',
+    Heart: 'Heart Chakra',
+    Throat: 'Throat Chakra',
+    Third: 'Third Eye Chakra',
+    Crown: 'Crown Chakra'
+  };
+  const chakraFocusName = chakraNameMap[focusKeyword] || programDay.chakra_focus;
+
+  const currentPose = selectedPoses.length > 0 ? selectedPoses[currentPoseIndex] : null;
+  const currentChakraName = currentPose?.chakraId
+    ? getChakraByName(currentPose.chakraId)?.englishName || chakraFocusName
+    : chakraFocusName;
 
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -23,7 +46,6 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
   const confidenceCount = useRef(0);
   const modelRef = useRef(null);
 
-  // Load TensorFlow.js and Teachable Machine libraries, then start camera
   useEffect(() => {
     let cancelled = false;
 
@@ -108,9 +130,7 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
   }, []);
 
   const predictLoop = async () => {
-    if (!isRunning.current || !modelRef.current || !videoRef.current || !canvasRef.current) {
-      return;
-    }
+    if (!isRunning.current || !modelRef.current || !videoRef.current || !canvasRef.current) return;
     if (videoRef.current.readyState < 2) {
       requestRef.current = requestAnimationFrame(predictLoop);
       return;
@@ -128,9 +148,7 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
 
       setPredictions(preds);
 
-      if (pose) {
-        drawSkeleton(pose, ctx);
-      }
+      if (pose) drawSkeleton(pose, ctx);
 
       const sorted = [...preds].sort((a, b) => b.probability - a.probability);
       const topPred = sorted[0];
@@ -145,10 +163,7 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
         let highest = '';
         let maxVal = 0;
         posesTracked.current.forEach((val, key) => {
-          if (val > maxVal) {
-            maxVal = val;
-            highest = key;
-          }
+          if (val > maxVal) { maxVal = val; highest = key; }
         });
         setDominantChakra(highest.replace(' CHAKRA', ''));
       }
@@ -202,8 +217,17 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
     });
   };
 
+  const handlePrevPose = () => {
+    setCurrentPoseIndex(prev => (prev > 0 ? prev - 1 : selectedPoses.length - 1));
+  };
+
+  const handleNextPose = () => {
+    setCurrentPoseIndex(prev => (prev < selectedPoses.length - 1 ? prev + 1 : 0));
+  };
+
   return (
     <div className="space-y-4">
+      {/* Header */}
       <div>
         <h2 className="text-2xl font-bold text-slate-900 mb-1">
           Pose Practice with Detection
@@ -211,14 +235,19 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
         <p className="text-sm text-slate-600">
           Hold poses while AI tracks your form. Target: {targetDuration} min
         </p>
+        {hasMultiplePoses && (
+          <p className="text-xs text-purple-600 mt-1 font-medium">
+            Practicing {selectedPoses.length} poses today — navigate between them below
+          </p>
+        )}
       </div>
 
-      {/* Split layout: camera left, controls right */}
-      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.5fr)_380px] gap-4">
+      {/* Main layout: camera + instructions */}
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] gap-4">
 
-        {/* Left: Camera feed (always prominent) */}
+        {/* Left: Camera feed with overlays */}
         <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="relative aspect-[4/3] bg-black">
+          <div className="relative bg-black" style={{ aspectRatio: '4/3' }}>
             <video
               ref={videoRef}
               autoPlay
@@ -236,12 +265,16 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
               height="480"
               style={{ display: cameraReady ? 'block' : 'none' }}
             />
+
+            {/* Loading state */}
             {!cameraReady && !cameraError && (
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
                 <Camera className="w-10 h-10 text-gray-400 mb-2" />
                 <p className="text-sm text-gray-300">{loadingText}</p>
               </div>
             )}
+
+            {/* Error state */}
             {cameraError && (
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-red-900/20">
                 <AlertCircle className="w-10 h-10 text-red-400 mb-2" />
@@ -249,56 +282,48 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
                 <p className="text-xs text-red-400 mt-1">{cameraError}</p>
               </div>
             )}
+
+            {/* Overlay: AI Active badge */}
             {cameraReady && (
-              <div className="absolute top-3 right-3 bg-green-500 text-white px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5">
+              <div className="absolute top-3 left-3 bg-green-500 text-white px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5">
                 <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
                 AI Active
               </div>
             )}
-          </div>
-        </div>
 
-        {/* Right: Controls sidebar */}
-        <div className="flex flex-col gap-4">
+            {/* Overlay: Timer (top-right) */}
+            {cameraReady && (
+              <div className="absolute top-3 right-3">
+                <SessionTimer
+                  targetDuration={targetDuration}
+                  onTimeUpdate={setTimeSpent}
+                  onTargetReached={handleCompleteSession}
+                  overlay
+                />
+              </div>
+            )}
 
-          {/* Timer */}
-          {cameraReady && (
-            <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
-              <SessionTimer
-                targetDuration={targetDuration}
-                onTimeUpdate={setTimeSpent}
-                onTargetReached={handleCompleteSession}
-              />
-            </div>
-          )}
-
-          {/* Pose classifications */}
-          <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm flex-1">
-            <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Pose Classifications</h4>
-            {predictions.length === 0 ? (
-              <p className="text-xs text-slate-400 italic">
-                {cameraReady ? 'Align your full body in frame...' : 'Waiting for camera...'}
-              </p>
-            ) : (
-              <div className="flex flex-col gap-2.5">
+            {/* Overlay: Classifications (bottom-left) */}
+            {cameraReady && predictions.length > 0 && (
+              <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm rounded-xl p-3 min-w-[160px]">
                 {dominantChakra && (
-                  <div className="p-2.5 bg-purple-50 border border-purple-100 rounded-lg">
-                    <span className="text-[10px] text-slate-500 font-medium uppercase">Dominant</span>
-                    <p className="text-base font-bold text-purple-700">{dominantChakra}</p>
+                  <div className="mb-2">
+                    <span className="text-[9px] text-white/60 font-medium uppercase">Dominant</span>
+                    <p className="text-sm font-bold text-white">{dominantChakra}</p>
                   </div>
                 )}
-                {predictions.slice(0, 5).map((p) => {
+                {predictions.slice(0, 3).map((p) => {
                   const chakraName = p.className.replace(' CHAKRA', '');
                   const probability = Math.round(p.probability * 100);
                   return (
-                    <div key={p.className} className="flex flex-col gap-0.5">
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-slate-700 font-medium truncate max-w-[120px]">{chakraName}</span>
-                        <span className="text-slate-500 font-semibold">{probability}%</span>
+                    <div key={p.className} className="flex flex-col gap-0.5 mb-1.5">
+                      <div className="flex justify-between items-center text-[10px]">
+                        <span className="text-white/80 font-medium truncate max-w-[100px]">{chakraName}</span>
+                        <span className="text-white/60 font-semibold">{probability}%</span>
                       </div>
-                      <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-purple-500 rounded-full transition-all duration-300"
+                          className="h-full bg-purple-400 rounded-full transition-all duration-300"
                           style={{ width: `${probability}%` }}
                         />
                       </div>
@@ -307,24 +332,70 @@ const PosePractice = ({ programDay, onNext, sessionData }) => {
                 })}
               </div>
             )}
-          </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-2">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-2.5 text-center">
-              <p className="text-[10px] text-blue-600 font-bold uppercase">Time</p>
-              <p className="text-lg font-bold text-blue-900">
-                {Math.floor(timeSpent / 60)}:{(timeSpent % 60).toString().padStart(2, '0')}
-              </p>
+            {/* Overlay: Stats (bottom-right) */}
+            {cameraReady && (
+              <div className="absolute bottom-3 right-3 flex items-center gap-2">
+                <div className="bg-black/60 backdrop-blur-sm rounded-full px-2.5 py-1 text-white text-xs font-semibold flex items-center gap-1.5">
+                  <Target className="w-3 h-3 text-purple-300" />
+                  {confidenceCount.current} poses
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Right: Instruction panel */}
+        <div className="flex flex-col gap-4">
+          {/* Pose navigation for multiple poses */}
+          {hasMultiplePoses && (
+            <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-sm">
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={handlePrevPose}
+                  className="p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
+                >
+                  <ChevronLeft className="w-4 h-4 text-slate-600" />
+                </button>
+                <div className="text-center">
+                  <span className="text-sm font-bold text-slate-900">
+                    {currentPose?.name || 'Pose'}
+                  </span>
+                  <span className="text-xs text-slate-500 ml-2">
+                    {currentPoseIndex + 1}/{selectedPoses.length}
+                  </span>
+                </div>
+                <button
+                  onClick={handleNextPose}
+                  className="p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
+                >
+                  <ChevronRight className="w-4 h-4 text-slate-600" />
+                </button>
+              </div>
+              {/* Pose dots */}
+              <div className="flex justify-center gap-1.5 mt-2">
+                {selectedPoses.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentPoseIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentPoseIndex
+                        ? 'bg-purple-600 w-4'
+                        : 'bg-slate-300 hover:bg-slate-400'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="bg-purple-50 border border-purple-200 rounded-lg p-2.5 text-center">
-              <p className="text-[10px] text-purple-600 font-bold uppercase">Poses</p>
-              <p className="text-lg font-bold text-purple-900">{confidenceCount.current}</p>
-            </div>
-            <div className="bg-green-50 border border-green-200 rounded-lg p-2.5 text-center">
-              <p className="text-[10px] text-green-600 font-bold uppercase">Target</p>
-              <p className="text-lg font-bold text-green-900">{targetDuration}m</p>
-            </div>
+          )}
+
+          {/* Instruction panel */}
+          <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm flex-1 min-h-0 overflow-hidden">
+            <PoseReference
+              chakraName={currentChakraName}
+              practiceStyle={practiceStyle}
+              mode="instruction"
+            />
           </div>
 
           {/* Complete button */}

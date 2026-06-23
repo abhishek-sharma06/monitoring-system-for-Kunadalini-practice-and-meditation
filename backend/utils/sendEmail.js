@@ -1,13 +1,20 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+let transporter = null;
+
+const getTransporter = () => {
+  if (!transporter) {
+    transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
   }
-});
+  return transporter;
+};
 
 const extractUrl = (html) => {
   const match = html.match(/href="([^"]+)"/);
@@ -43,12 +50,14 @@ const sendEmail = async ({ to, subject, html }) => {
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log(`Email sent to ${to}`);
+    const transport = getTransporter();
+    await transport.verify();
+    await transport.sendMail(mailOptions);
+    console.log(`✓ Email sent to ${to}`);
     return { success: true, delivered: true, link: url };
   } catch (error) {
     // Email failed — log the error and return the link so frontend can show it.
-    console.error(`Email send failed: ${error.message}`);
+    console.error(`✗ Email send failed: ${error.message}`);
     console.log('\n' + '='.repeat(60));
     console.log('  EMAIL FALLBACK — verification link:');
     console.log('='.repeat(60));
