@@ -1,0 +1,9 @@
+metric,correlation_with_mood,strength,sample_size
+duration_minutes,,Negligible,6
+physical_score,0.403,Moderate,6
+prana_score,,Negligible,6
+mind_score,,Negligible,6
+emotion_score,,Negligible,6
+spiritual_score,,Negligible,6
+overall_index_before,,Negligible,6
+overall_index_after,0.403,Moderate,6

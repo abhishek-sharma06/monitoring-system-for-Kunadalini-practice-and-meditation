@@ -113,7 +113,8 @@ const DayFlow = () => {
   // Complete the day and submit session
   const handleCompleteDay = async (finalData = {}) => {
     // Ensure core session values are present before saving.
-    if (!sessionData.mood_before || !sessionData.mood_after || !sessionData.duration_minutes) {
+    // Rest days skip duration validation since they have no practice.
+    if (!programDay?.is_rest_day && (!sessionData.mood_before || !sessionData.mood_after || !sessionData.duration_minutes)) {
       setError('Please complete the mood check-ins and practice duration before finishing this day.');
       return;
     }

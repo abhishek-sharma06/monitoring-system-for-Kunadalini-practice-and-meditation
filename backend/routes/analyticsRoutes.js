@@ -27,5 +27,8 @@ router.post(
 // Route to fetch weekly target completion rates.
 router.get('/goals', analyticsController.getGoals);
 
+// Route to export session data as JSON for Python analytics.
+router.get('/export', analyticsController.exportData);
+
 // Export router.
 module.exports = router;

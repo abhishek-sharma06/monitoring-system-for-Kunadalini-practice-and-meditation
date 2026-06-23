@@ -189,6 +189,58 @@ exports.upsertGoal = async (req, res) => {
   }
 };
 
+// Export session data as JSON for Python analytics pipeline.
+exports.exportData = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    // Fetch all sessions for this user.
+    const [sessions] = await pool.query(
+      `SELECT id, user_id, duration_minutes, score, poses_detected,
+              chakra_focus, mood_before, mood_after,
+              physical_score, prana_score, mind_score, emotion_score, spiritual_score,
+              overall_index_before, overall_index_after, program_day_id, notes, created_at
+       FROM sessions WHERE user_id = ? ORDER BY created_at ASC`,
+      [userId]
+    );
+
+    // Fetch user info.
+    const [users] = await pool.query(
+      `SELECT id, name, email, level, created_at FROM users WHERE id = ?`,
+      [userId]
+    );
+
+    // Fetch goal settings.
+    const [goals] = await pool.query(
+      `SELECT user_id, weekly_sessions_target FROM goals WHERE user_id = ?`,
+      [userId]
+    );
+
+    // Fetch day completions.
+    const [dayCompletions] = await pool.query(
+      `SELECT dc.id, dc.user_id, dc.program_day_id, dc.session_id, dc.completed_at,
+              pd.program_id, pd.day_number, pd.chakra_focus AS program_chakra
+       FROM day_completions dc
+       JOIN program_days pd ON dc.program_day_id = pd.id
+       WHERE dc.user_id = ?`,
+      [userId]
+    );
+
+    res.status(200).json({
+      success: true,
+      data: {
+        export_date: new Date().toISOString(),
+        user: users[0] || null,
+        goals: goals[0] || null,
+        sessions,
+        day_completions: dayCompletions
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 // Retrieve user's weekly goals and percentage completion.
 exports.getGoals = async (req, res) => {
   try {

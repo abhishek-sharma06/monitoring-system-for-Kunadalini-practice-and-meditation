@@ -27,6 +27,7 @@ This platform helps practitioners track their spiritual journey through daily se
 - **Structured Programs** — 14-day (beginner), 21-day (intermediate), and 30-day (advanced) chakra programs with daily guided flows
 - **Practice History** — View and filter all past sessions
 - **Analytics** — Charts and graphs for progress over time
+- **Analytics Pipeline** — Python-based data analysis with cohort retention, mood correlation, and ML goal prediction
 - **AI Assistant** — Chatbot for breathwork, mantra, chakra, and meditation guidance (Gemini API)
 - **Mantra Audio** — Play chakra-specific bija mantras during practice
 
@@ -49,6 +50,8 @@ This platform helps practitioners track their spiritual journey through daily se
 | **AI Assistant** | Google Gemini API (gemini-1.5-flash) |
 | **Pose Detection** | TensorFlow.js, Teachable Machine (MobileNetV1) |
 | **Charts** | Recharts |
+| **Analytics** | Python, Pandas, scikit-learn, NumPy |
+| **BI Integration** | CSV export for Power BI / Looker Studio |
 | **Icons** | Lucide React |
 
 ---
@@ -158,7 +161,20 @@ This platform helps practitioners track their spiritual journey through daily se
 │
 ├── .gitignore
 ├── LICENSE
-└── README.md
+├── README.md
+└── analytics/                  # Python analytics pipeline
+    ├── fetch_data.py           # Fetches data from API → CSV
+    ├── cohort_analysis.py      # User retention cohort analysis
+    ├── mood_correlation.py     # Mood vs session metric correlations
+    ├── streak_prediction.py    # ML model for goal completion prediction
+    ├── requirements.txt        # Python dependencies
+    ├── README.md               # Analytics setup instructions
+    └── output/                 # Generated CSV files
+        ├── sessions.csv
+        ├── cohort_detailed.csv
+        ├── chakra_mood_report.csv
+        ├── correlation_report.csv
+        └── prediction_results.csv
 ```
 
 ---
@@ -259,7 +275,9 @@ Check the database seed script or create an admin user via the setup process. Cr
 |--------|------|-------------|
 | POST | `/api/sessions` | Log a practice session |
 | GET | `/api/sessions` | Get user sessions |
-| GET | `/api/analytics` | Get user analytics |
+| GET | `/api/analytics/summary` | Get aggregate session stats |
+| GET | `/api/analytics/trends` | Get chart trend data |
+| GET | `/api/analytics/export` | Export all data as JSON for Python pipeline |
 | POST | `/api/chat` | Send message to AI assistant |
 | POST | `/api/programs/:id/enroll` | Enroll in a program |
 
@@ -295,8 +313,46 @@ The app tracks practice across all 7 chakras:
 
 ---
 
+## Analytics Pipeline
+
+The project includes a Python-based analytics layer for deeper data analysis beyond the in-app charts.
+
+### What It Does
+
+| Script | Analysis | Output |
+|--------|----------|--------|
+| `cohort_analysis.py` | Weekly practice retention tracking | `cohort_detailed.csv` |
+| `mood_correlation.py` | Correlation between session metrics and mood improvement | `chakra_mood_report.csv`, `correlation_report.csv` |
+| `streak_prediction.py` | RandomForest model predicting weekly goal completion | `prediction_results.csv`, `feature_importance.csv` |
+
+### Quick Start
+
+```bash
+# Install Python dependencies
+cd analytics
+pip install -r requirements.txt
+
+# Start backend server (separate terminal)
+cd backend
+npm run dev
+
+# Fetch data from your app
+python fetch_data.py
+
+# Run analysis scripts
+python cohort_analysis.py
+python mood_correlation.py
+python streak_prediction.py
+```
+
+### Output
+
+CSV files are saved to `analytics/output/` and can be imported into Power BI, Google Looker Studio, or any BI tool.
+
+---
+
 ## License
 
-(c) 2025 Abhishek Sharma M. All Rights Reserved.
+(c) 2026 Abhishek Sharma M. All Rights Reserved.
 
 This project is proprietary. See [LICENSE](./LICENSE) for terms.

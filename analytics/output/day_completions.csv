@@ -1,0 +1,7 @@
+id,user_id,program_day_id,session_id,completed_at,program_id,day_number,program_chakra
+4,57,1,4,2026-06-23T09:54:21.000Z,1,1,Root
+5,57,2,5,2026-06-23T09:56:30.000Z,1,2,Root
+6,57,3,6,2026-06-23T09:57:57.000Z,1,3,Sacral
+7,57,4,7,2026-06-23T09:59:19.000Z,1,4,Sacral
+8,57,5,8,2026-06-23T10:00:26.000Z,1,5,Solar Plexus
+9,57,6,9,2026-06-23T10:01:46.000Z,1,6,Solar Plexus
